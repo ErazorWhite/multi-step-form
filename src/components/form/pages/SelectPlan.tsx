@@ -1,18 +1,12 @@
-export const SelectPlan = () => {
-    return (
-        <>
-            <h1>Select your plan</h1>
-            <p>You have the option of monthly or yearly billing.</p>
+import {PageBox} from "../../PageBox/PageBox.tsx";
+import {FormRadioGroup} from "../FormRadioGroup/FormRadioGroup.tsx";
 
-            <input id="arcade" value="arcade" type="radio"/>
-            <label htmlFor="arcade">Arcade</label>
+export const SelectPlan = () => (
 
-            <input id="advanced" value="advanced" type="radio"/>
-            <label htmlFor="advanced">Advanced</label>
+    <PageBox headerText='Select your plan'
+             descriptionText='You have the option of monthly or yearly billing.'>
 
-            <input id="pro" value="pro" type="radio"/>
-            <label htmlFor="pro">Pro</label>
+        <FormRadioGroup/>
 
-        </>
-    )
-}
+    </PageBox>
+)

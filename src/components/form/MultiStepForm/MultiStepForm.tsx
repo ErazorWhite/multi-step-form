@@ -1,26 +1,26 @@
-import {Li, Nav, Section, Ul} from "./MultiStepForm.styled.ts";
-import {Form, Formik} from "formik";
-import {useCallback, useState} from "react";
+import {Bottom, Li, Nav, Section, StyledForm, Ul} from "./MultiStepForm.styled.ts";
+import {Formik} from "formik";
+import {useCallback} from "react";
 import {SelectPlan} from "../pages/SelectPlan.tsx";
 import {PersonalInfo} from "../pages/PersonalInfo.tsx";
 import {PickAddons} from "../pages/PickAddons.tsx";
 import {FinishingUp} from "../pages/FinishingUp.tsx";
 import {Thanks} from "../pages/Thanks.tsx";
 import {useMultiStepForm} from "../../../hooks/useMultiStepForm.ts";
-
-const initialSteps = [
-    <PersonalInfo/>,
-    <SelectPlan/>,
-    <PickAddons/>,
-    <FinishingUp/>,
-    <Thanks/>
-]
+import {Button} from "../../Button/Button.tsx";
 
 const initialValues = {
-    personalInfo: {name: '', email: '', phone: ''},
-    plan: {type: '', period: ''},
-    addons: [''],
+    name: '', email: '', phone: '', // page 1
+    type: '', period: '',           // page 2
+    addons: [],                     // page 3
 }
+
+const initialSteps = [
+    <PersonalInfo/>,    // page 1
+    <SelectPlan/>,      // page 2
+    <PickAddons/>,      // page 3
+    <FinishingUp/>,     // page 4
+]
 
 
 export const MultiStepForm = () => {
@@ -31,44 +31,55 @@ export const MultiStepForm = () => {
         next,
         back,
     } = useMultiStepForm(initialSteps);
-    const [formData, setFormData] = useState(initialValues);
+
+    console.log(currentStepIndex + 1)
 
     const handleGoto = (i: number) => {
         goTo(i);
     }
 
-    const handleSubmit = useCallback(() => {
-        console.log(formData);
+    const handleSubmit = useCallback((values) => {
+        console.log(values);
     }, []);
 
     return (
         <>
-            <Nav>
-                <Ul>
-                    {initialSteps.map((_, i) => (
-                        <Li key={i} onClick={() => {
-                            handleGoto(i)
-                        }}>{i + 1}</Li>
-                    ))}
-                </Ul>
-            </Nav>
 
-            <Section>
-                <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-                    <Form>
-                        {currentStepIndex + 1} / {initialSteps.length}
+            <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+                {formik => (
+                    <StyledForm>
+                        <Nav>
+                            <Ul>
+                                {initialSteps.map((_, i) => (
+                                    <Li key={i}
+                                        isActive={i === currentStepIndex}
+                                        onClick={() => handleGoto(i)}>{i + 1}
+                                    </Li>
+                                ))}
+                            </Ul>
+                        </Nav>
 
-                        {step}
+                        {formik?.submitCount > 0 ? <Section><Thanks/></Section> :
+                            <>
+                                <Section>
+                                    {step}
+                                </Section>
 
-                        <div>
-                            {currentStepIndex > 0 && <button onClick={back} type='button'>Go back</button>}
-                            {currentStepIndex < initialSteps.length - 1 &&
-                                <button onClick={next} type='button'>Next Step</button>}
-                            {currentStepIndex === initialSteps.length - 1 && <button type='submit'>Confirm</button>}
-                        </div>
-                    </Form>
-                </Formik>
-            </Section>
+                                <Bottom justify={currentStepIndex > 0 ? 'space-between' : 'end'}>
+                                    {currentStepIndex > 0 &&
+                                        <Button onClick={back} type='button' variant="back">Go back</Button>}
+
+                                    {currentStepIndex < initialSteps.length - 1 &&
+                                        <Button onClick={next} type='button' variant="next">Next Step</Button>}
+
+                                    {currentStepIndex === initialSteps.length - 1 &&
+                                        <Button type='submit' variant="submit">Confirm</Button>}
+                                </Bottom>
+                            </>
+                        }
+                    </StyledForm>
+                )}
+            </Formik>
         </>
     )
 }

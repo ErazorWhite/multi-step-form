@@ -33,14 +33,23 @@
     --animation: color 150ms ease-in, background-color 150ms ease-in, border-color 150ms ease-in;
 }
 
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     place-items: center;
     min-width: 320px;
-    min-height: 100vh;
+
     background-color: var(--color-bg);
     font-size: 16px;
 }
+
+html, body, #root {
+    height: 100%;
+}
+
 
 @font-face {
     font-family: Ubuntu;
