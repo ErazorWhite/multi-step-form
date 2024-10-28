@@ -1,33 +1,57 @@
-import {ArcadeIcon} from "../../icons/ArcadeIcon.tsx";
-import {AdvancedIcon} from "../../icons/AdvancedIcon.tsx";
-import {ProIcon} from "../../icons/ProIcon.tsx";
-import {RadioIconThumb} from "./FormRadioGroup.styled.ts";
+import {useField} from "formik";
+import {IRadioInput, RadioInput} from "../../RadioInput/RadioInput.tsx";
+import {useState} from "react";
 
-export const FormRadioGroup = () => {
+type radioOptionType = Pick<IRadioInput, 'label' | 'value' | 'color' | 'price' | 'icon'>;
+
+const YEARLY_MULTIPLIER = 10;
+
+interface IFormRadioGroupProps {
+    name: string,
+    options: radioOptionType[],
+    hasYearlyTrigger?: boolean,
+}
+
+export const FormRadioGroup = ({name, options, hasYearlyTrigger = false}: IFormRadioGroupProps) => {
+    const [field, meta] = useField(name);
+    const [isYearly, setIsYearly] = useState(false);
+
     return (
+        <>
+            <ul>
+                {options.map(({
+                                  label,
+                                  value,
+                                  color,
+                                  price,
+                                  icon
+                              }: radioOptionType) => (
+                    <li key={value}>
+                        <RadioInput name={field.name}
+                                    label={label}
+                                    value={value}
+                                    color={color}
+                                    price={isYearly ? price * YEARLY_MULTIPLIER : price}
+                                    icon={icon}
+                                    checked={field.value === value}
+                                    onChange={field.onChange}
+                                    onBlur={field.onBlur}/>
+                    </li>
+                ))
+                }
+            </ul>
+            {meta.touched && meta.error ? (
+                <div>{meta.error}</div>
+            ) : null}
 
-        <ul>
-            <li>
-                <RadioIconThumb backgroundColor="orange">
-                    <ArcadeIcon/>
-                </RadioIconThumb>
-                <input id="arcade" value="arcade" type="radio" name="plan"/>
-                <label htmlFor="arcade">Arcade</label>
-            </li>
-            <li>
-                <RadioIconThumb backgroundColor="pink">
-                    <AdvancedIcon/>
-                </RadioIconThumb>
-                <input id="advanced" value="advanced" type="radio" name="plan"/>
-                <label htmlFor="advanced">Advanced</label>
-            </li>
-            <li>
-                <RadioIconThumb backgroundColor="purple">
-                    <ProIcon/>
-                </RadioIconThumb>
-                <input id="pro" value="pro" type="radio" name="plan"/>
-                <label htmlFor="pro">Pro</label>
-            </li>
-        </ul>
+            {hasYearlyTrigger && <div>
+                <button type="button" onClick={() => {
+                    setIsYearly(!isYearly);
+                }}>
+                    Monthly TRIGGER Yearly
+                    {` (${isYearly})`}
+                </button>
+            </div>}
+        </>
     )
 }

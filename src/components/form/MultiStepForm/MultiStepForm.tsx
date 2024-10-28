@@ -32,8 +32,6 @@ export const MultiStepForm = () => {
         back,
     } = useMultiStepForm(initialSteps);
 
-    console.log(currentStepIndex + 1)
-
     const handleGoto = (i: number) => {
         goTo(i);
     }
