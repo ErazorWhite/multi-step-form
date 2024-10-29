@@ -1,20 +1,47 @@
-import {useField} from "formik";
-import {IRadioInput, RadioInput} from "../../RadioInput/RadioInput.tsx";
-import {useState} from "react";
-
-type radioOptionType = Pick<IRadioInput, 'label' | 'value' | 'color' | 'price' | 'icon'>;
-
-const YEARLY_MULTIPLIER = 10;
+import {useField, useFormikContext} from "formik";
+import {RadioInput} from "../../RadioInput/RadioInput.tsx";
+import {IPlanOption} from "../pages/SelectPlan.tsx";
+import {ChangeEvent, useCallback} from "react";
+import {ToggleSwitch} from "../../ToggleSwitch/ToggleSwitch.tsx";
+import {Li} from "../../../global/global.styled.ts";
 
 interface IFormRadioGroupProps {
     name: string,
-    options: radioOptionType[],
+    options: IPlanOption[],
     hasYearlyTrigger?: boolean,
 }
 
+interface IFormValues {
+    isYearly: boolean;
+    plan: string;
+    price: number;
+}
+
+
 export const FormRadioGroup = ({name, options, hasYearlyTrigger = false}: IFormRadioGroupProps) => {
     const [field, meta] = useField(name);
-    const [isYearly, setIsYearly] = useState(false);
+    const {values, setFieldValue} = useFormikContext<IFormValues>();
+    const {isYearly, plan} = values;
+
+    const setNewPrice = useCallback(async (value: string, isYearly: boolean) => {
+        const selectedPlan = options.find(option => option.value === value);
+        if (selectedPlan) {
+            const newPrice = isYearly ? selectedPlan.yearlyPrice : selectedPlan.monthlyPrice;
+            await setFieldValue('price', newPrice)
+        }
+    }, [options, setFieldValue])
+
+    const toggleIsYearly = useCallback(async () => {
+        const newIsYearly = !isYearly
+        await setFieldValue('isYearly', newIsYearly);
+        if (plan)
+            await setNewPrice(plan, newIsYearly);
+    }, [isYearly, setFieldValue, plan, setNewPrice]);
+
+    const handlePlanChange = useCallback(async (event: ChangeEvent<HTMLInputElement>) => {
+        field.onChange(event);
+        await setNewPrice(event.target.value, isYearly);
+    }, [field, setNewPrice, isYearly]);
 
     return (
         <>
@@ -23,20 +50,24 @@ export const FormRadioGroup = ({name, options, hasYearlyTrigger = false}: IFormR
                                   label,
                                   value,
                                   color,
-                                  price,
+                                  monthlyPrice,
+                                  yearlyPrice,
+                                  currency,
                                   icon
-                              }: radioOptionType) => (
-                    <li key={value}>
+                              }: IPlanOption) => (
+                    <Li key={value}>
                         <RadioInput name={field.name}
                                     label={label}
                                     value={value}
                                     color={color}
-                                    price={isYearly ? price * YEARLY_MULTIPLIER : price}
+                                    price={isYearly ? yearlyPrice : monthlyPrice}
+                                    currency={currency}
+                                    isYearly={isYearly}
                                     icon={icon}
                                     checked={field.value === value}
-                                    onChange={field.onChange}
+                                    onChange={handlePlanChange}
                                     onBlur={field.onBlur}/>
-                    </li>
+                    </Li>
                 ))
                 }
             </ul>
@@ -44,14 +75,9 @@ export const FormRadioGroup = ({name, options, hasYearlyTrigger = false}: IFormR
                 <div>{meta.error}</div>
             ) : null}
 
-            {hasYearlyTrigger && <div>
-                <button type="button" onClick={() => {
-                    setIsYearly(!isYearly);
-                }}>
-                    Monthly TRIGGER Yearly
-                    {` (${isYearly})`}
-                </button>
-            </div>}
+            {hasYearlyTrigger &&
+                <ToggleSwitch isChecked={isYearly} onToggle={toggleIsYearly}/>
+            }
         </>
     )
 }

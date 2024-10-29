@@ -10,9 +10,9 @@ import {useMultiStepForm} from "../../../hooks/useMultiStepForm.ts";
 import {Button} from "../../Button/Button.tsx";
 
 const initialValues = {
-    name: '', email: '', phone: '', // page 1
-    type: '', period: '',           // page 2
-    addons: [],                     // page 3
+    name: '', email: '', phone: '',         // page 1
+    plan: '', price: 0, isYearly: false,    // page 2
+    addons: [],                             // page 3
 }
 
 const initialSteps = [

@@ -12,18 +12,20 @@ enum iconColors {
     PURPLE = "purple",
 }
 
-interface IPlanOption {
+export interface IPlanOption {
     label: string;
     value: string;
-    price: number;
+    monthlyPrice: number;
+    yearlyPrice: number;
+    currency: string;
     color: iconColors;
     icon: ReactNode;
 }
 
 const planOptions: IPlanOption[] = [
-    {label: "Arcade", value: "arcade", price: 9, color: iconColors.ORANGE, icon: <ArcadeIcon/>},
-    {label: "Advanced", value: "advanced", price: 12, color: iconColors.PINK, icon: <AdvancedIcon/>},
-    {label: "Pro", value: "pro", price: 15, color: iconColors.PURPLE, icon: <ProIcon/>},
+    {label: "Arcade", value: "arcade", monthlyPrice: 9, yearlyPrice: 90, currency: "$", color: iconColors.ORANGE, icon: <ArcadeIcon/>},
+    {label: "Advanced", value: "advanced", monthlyPrice: 12, yearlyPrice: 120, currency: "$",  color: iconColors.PINK, icon: <AdvancedIcon/>},
+    {label: "Pro", value: "pro", monthlyPrice: 15, yearlyPrice: 150 ,currency: "$",  color: iconColors.PURPLE, icon: <ProIcon/>},
 ]
 
 export const SelectPlan = () => (
@@ -31,7 +33,7 @@ export const SelectPlan = () => (
     <PageBox headerText='Select your plan'
              descriptionText='You have the option of monthly or yearly billing.'>
 
-        <FormRadioGroup name="plan" options={planOptions} hasYearlyTrigger={true}/>
+        <FormRadioGroup name="plan" options={planOptions} hasYearlyTrigger/>
 
     </PageBox>
 )
