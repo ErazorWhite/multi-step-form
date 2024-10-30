@@ -9,6 +9,8 @@ export const FormInputLabel = styled.label`
     color: var(--color-denim);
     display: block;
     margin: 0 0 3px 0;
+    
+    overflow: scroll;
 `
 
 export const FormInputField = styled.input`

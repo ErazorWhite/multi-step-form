@@ -57,6 +57,7 @@ export const Section = styled.section`
     margin: -73px 16px 0 16px;
     border-radius: 10px;
     padding: 32px 24px;
+    overflow: auto;
 `
 
 // Bottom

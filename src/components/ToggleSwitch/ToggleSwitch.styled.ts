@@ -2,12 +2,15 @@ import styled from 'styled-components';
 
 export const ToggleMainBlock = styled.button`
     display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    padding: 14px 56px;
+    align-items: center;
     width: 100%;
     background-color: var(--color-very-light-grey);
     border-radius: 8px;
-    padding: 14px 56px;
-    justify-content: space-between;
-    align-items: center;
+    
+    overflow: auto;
 `
 
 interface ToggleOptionProps {
@@ -23,6 +26,7 @@ export const ToggleOption = styled.div.withConfig({shouldForwardProp: (prop) => 
 export const ToggleContainer = styled.div`
     position: relative;
     display: flex;
+    flex-shrink: 0;
     width: 38px;
     height: 20px;
     background-color: var(--color-denim);

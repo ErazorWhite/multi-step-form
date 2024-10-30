@@ -8,12 +8,19 @@ import {FinishingUp} from "../pages/FinishingUp.tsx";
 import {Thanks} from "../pages/Thanks.tsx";
 import {useMultiStepForm} from "../../../hooks/useMultiStepForm.ts";
 import {Button} from "../../Button/Button.tsx";
+import {FORM_FIELD_NAMES} from "../../../global/сonstants.ts";
 
 const initialValues = {
-    name: '', email: '', phone: '',         // page 1
-    plan: '', price: 0, isYearly: false,    // page 2
-    addons: [],                             // page 3
-}
+    [FORM_FIELD_NAMES.NAME]: '',
+    [FORM_FIELD_NAMES.EMAIL]: '',
+    [FORM_FIELD_NAMES.PHONE]: '',
+
+    [FORM_FIELD_NAMES.SELECTED_PLAN]: '',
+    [FORM_FIELD_NAMES.PLAN_PRICE]: 0,
+    [FORM_FIELD_NAMES.IS_YEARLY]: false,
+
+    [FORM_FIELD_NAMES.SELECTED_ADDONS]: [],
+};
 
 const initialSteps = [
     <PersonalInfo/>,    // page 1

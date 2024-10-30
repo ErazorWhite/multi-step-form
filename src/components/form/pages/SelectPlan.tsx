@@ -4,6 +4,7 @@ import {AdvancedIcon} from "../../icons/AdvancedIcon.tsx";
 import {ProIcon} from "../../icons/ProIcon.tsx";
 import {FormRadioGroup} from "../FormRadioGroup/FormRadioGroup.tsx";
 import {ReactNode} from "react";
+import {FORM_FIELD_NAMES} from "../../../global/сonstants.ts";
 
 
 enum iconColors {
@@ -33,7 +34,7 @@ export const SelectPlan = () => (
     <PageBox headerText='Select your plan'
              descriptionText='You have the option of monthly or yearly billing.'>
 
-        <FormRadioGroup name="plan" options={planOptions} hasYearlyTrigger/>
+        <FormRadioGroup name={FORM_FIELD_NAMES.SELECTED_PLAN} options={planOptions} hasYearlyTrigger/>
 
     </PageBox>
 )

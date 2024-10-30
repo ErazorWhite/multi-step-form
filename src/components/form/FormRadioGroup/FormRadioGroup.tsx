@@ -4,6 +4,7 @@ import {IPlanOption} from "../pages/SelectPlan.tsx";
 import {ChangeEvent, useCallback} from "react";
 import {ToggleSwitch} from "../../ToggleSwitch/ToggleSwitch.tsx";
 import {Li} from "../../../global/global.styled.ts";
+import {FORM_FIELD_NAMES} from "../../../global/сonstants.ts";
 
 interface IFormRadioGroupProps {
     name: string,
@@ -11,7 +12,7 @@ interface IFormRadioGroupProps {
     hasYearlyTrigger?: boolean,
 }
 
-interface IFormValues {
+interface IFormRadioContextValues {
     isYearly: boolean;
     plan: string;
     price: number;
@@ -20,20 +21,21 @@ interface IFormValues {
 
 export const FormRadioGroup = ({name, options, hasYearlyTrigger = false}: IFormRadioGroupProps) => {
     const [field, meta] = useField(name);
-    const {values, setFieldValue} = useFormikContext<IFormValues>();
+    const {values, setFieldValue} = useFormikContext<IFormRadioContextValues>();
+    console.log(values)
     const {isYearly, plan} = values;
 
     const setNewPrice = useCallback(async (value: string, isYearly: boolean) => {
         const selectedPlan = options.find(option => option.value === value);
         if (selectedPlan) {
             const newPrice = isYearly ? selectedPlan.yearlyPrice : selectedPlan.monthlyPrice;
-            await setFieldValue('price', newPrice)
+            await setFieldValue(FORM_FIELD_NAMES.PLAN_PRICE, newPrice)
         }
     }, [options, setFieldValue])
 
     const toggleIsYearly = useCallback(async () => {
         const newIsYearly = !isYearly
-        await setFieldValue('isYearly', newIsYearly);
+        await setFieldValue(FORM_FIELD_NAMES.IS_YEARLY, newIsYearly);
         if (plan)
             await setNewPrice(plan, newIsYearly);
     }, [isYearly, setFieldValue, plan, setNewPrice]);

@@ -1,8 +1,12 @@
 import styled from "styled-components";
 
-export const RadioLabelBox = styled.label`
+interface IRadioLabelBox {
+    alignItems: "flex-start" | "center";
+}
+
+export const RadioLabelBox = styled.label.withConfig({ shouldForwardProp: (prop) => prop !== 'alignItems', })<IRadioLabelBox>`
     display: flex;
-    align-items: flex-start;
+    align-items: ${({alignItems = "flex-start"})=>alignItems};
     gap: 14px;
     padding: 14px 16px;
     
@@ -14,6 +18,8 @@ export const RadioLabelBox = styled.label`
     line-height: 20px;
     font-size: 16px;
     font-weight: 500;
+    
+    overflow: auto;
 `
 export const StyledRadioInput = styled.input`
     &:checked + ${RadioLabelBox} {

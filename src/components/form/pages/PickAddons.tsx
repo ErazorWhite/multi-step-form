@@ -1,5 +1,6 @@
 import {PageBox} from "../../PageBox/PageBox.tsx";
 import {FormCheckboxGroup} from "../FormCheckboxGroup/FormCheckboxGroup.tsx";
+import {FORM_FIELD_NAMES} from "../../../global/сonstants.ts";
 
 export interface IAddon {
     label: string;
@@ -41,7 +42,7 @@ export const PickAddons = () => (
     <PageBox headerText='Pick add-ons'
              descriptionText='Add-ons help enhance your gaming experience.'>
 
-        <FormCheckboxGroup name="addons" options={addons}/>
+        <FormCheckboxGroup name={FORM_FIELD_NAMES.SELECTED_ADDONS} options={addons}/>
 
     </PageBox>
 )

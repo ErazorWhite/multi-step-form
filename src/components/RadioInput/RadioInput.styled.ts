@@ -5,10 +5,11 @@ interface IRadioIconThumb {
 }
 
 export const RadioIconBox = styled.span.withConfig({shouldForwardProp: (prop) => prop !== 'backgroundColor'})<IRadioIconThumb>`
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
     margin-top: 3px;
-    text-align: center;
-    align-content: center;
     width: 40px;
     height: 40px;
     border-radius: 50%;
