@@ -10,5 +10,5 @@ export const FORM_FIELD_NAMES = {
     IS_YEARLY: 'isYearly',
 
     // page 3
-    SELECTED_ADDONS: 'selectedAddons',
+    PICKED_ADDONS: 'pickedAddons',
 };

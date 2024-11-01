@@ -1,45 +1,24 @@
-import {IAddon} from "../pages/PickAddons.tsx";
 import {CheckBoxInput} from "../../CheckBoxInput/CheckBoxInput.tsx";
 import {Li} from "../../../global/global.styled.ts";
-import {useFormikContext} from "formik";
-import {FORM_FIELD_NAMES} from "../../../global/сonstants.ts";
-import {useMemo} from "react";
+import {useField, useFormikContext} from "formik";
+import {IAddon} from "../../../global/types.ts";
 
 interface IFormCheckBoxGroupProps {
     name: string;
     options: IAddon[];
 }
 
-interface IPickedAddonDetails {
-    value: string;
-    price: number;
-}
-
 interface IFormCheckBoxContextValues {
     isYearly: boolean;
-    selectedAddons: IPickedAddonDetails[]
 }
 
 export const FormCheckboxGroup = ({name, options}: IFormCheckBoxGroupProps) => {
-    const {values, setFieldValue} = useFormikContext<IFormCheckBoxContextValues>();
-    const {selectedAddons, isYearly} = values;
-
-    const selectedAddonValues = useMemo(
-        () => new Set(selectedAddons.map((addon) => addon.value)),
-        [selectedAddons]
-    );
-
-    const handleAddonChange = async (addon: IPickedAddonDetails) => {
-        const isSelected = selectedAddonValues.has(addon.value);
-        const newSelectedAddons = isSelected
-            ? selectedAddons.filter(selectedAddon => selectedAddon.value !== addon.value)
-            : [...selectedAddons, addon];
-        await setFieldValue(FORM_FIELD_NAMES.SELECTED_ADDONS, newSelectedAddons);
-    };
+    const [field] = useField(name);
+    const {values: {isYearly}} = useFormikContext<IFormCheckBoxContextValues>();
 
     return (
         <ul>
-            {options.map(({value, label, description, currency, monthlyPrice, yearlyPrice}) => (
+            {options.map(({label, value, description, currency, yearlyPrice, monthlyPrice}) => (
                 <Li key={value}>
                     <CheckBoxInput name={name}
                                    label={label}
@@ -48,13 +27,9 @@ export const FormCheckboxGroup = ({name, options}: IFormCheckBoxGroupProps) => {
                                    currency={currency}
                                    price={isYearly ? yearlyPrice : monthlyPrice}
                                    isYearly={isYearly}
-                                   checked={selectedAddonValues.has(value)}
-                                   onChange={() =>
-                                       handleAddonChange({
-                                           value,
-                                           price: isYearly ? yearlyPrice : monthlyPrice,
-                                       })
-                                   }
+                                   checked={field.value?.includes(value)}
+                                   onChange={field.onChange}
+                                   onBlur={field.onBlur}
                     />
                 </Li>
             ))}

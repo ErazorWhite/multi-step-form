@@ -1,23 +1,33 @@
 import {PageBox} from "../../PageBox/PageBox.tsx";
+import {useFormikContext} from "formik";
+import {IAddon, IPlan} from "../../../global/types.ts";
+import {FC, useMemo} from "react";
+import {Summary} from "../../Summary/Summary.tsx";
 
-export const FinishingUp = () => (
+interface IFinishingUpContextValues {
+    isYearly: boolean,
+    selectedPlan: string,
+    pickedAddons: string[],
+}
 
-    <PageBox headerText='Finishing up'
-             descriptionText='Double-check everything looks OK before confirming.'>
+type Props = {
+    plans: IPlan[],
+    addons: IAddon[],
+    goTo: (i: number) => void,
+}
 
-        <div>
-            <div>
-                <div>
-                    <h2>Arcade (Monthly)</h2>
-                    <button>Change</button>
-                </div>
-                <span>$9/mo</span>
-            </div>
-            <p>Online service</p> <span>+$1/mo</span>
-            <p>Larger stroage</p> <span>+$2/mo</span>
-        </div>
+export const FinishingUp: FC<Props> = ({plans, addons, goTo}) => {
+    const {values: {isYearly, selectedPlan, pickedAddons}} = useFormikContext<IFinishingUpContextValues>()
+    const selectedPlanDetails = useMemo(() => plans.find(plan => plan.value === selectedPlan), [plans, selectedPlan]);
+    const pickedAddonsDetails = useMemo(() => addons.filter(addon => pickedAddons.includes(addon.value)), [addons, pickedAddons]);
 
-        <p>Total (per month)</p> <span>+$12/mo</span>
+    return (
+        <PageBox headerText='Finishing up'
+                 descriptionText='Double-check everything looks OK before confirming.'>
 
-    </PageBox>
-)
+        <Summary isYearly={isYearly} plan={selectedPlanDetails} addons={pickedAddonsDetails} goTo={goTo}/>
+
+        </PageBox>
+    )
+
+}

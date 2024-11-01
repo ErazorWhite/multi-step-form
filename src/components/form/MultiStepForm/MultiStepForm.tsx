@@ -8,36 +8,33 @@ import {FinishingUp} from "../pages/FinishingUp.tsx";
 import {Thanks} from "../pages/Thanks.tsx";
 import {useMultiStepForm} from "../../../hooks/useMultiStepForm.ts";
 import {Button} from "../../Button/Button.tsx";
-import {FORM_FIELD_NAMES} from "../../../global/сonstants.ts";
+import {addons, plans} from "../../../global/data.ts";
 
 const initialValues = {
-    [FORM_FIELD_NAMES.NAME]: '',
-    [FORM_FIELD_NAMES.EMAIL]: '',
-    [FORM_FIELD_NAMES.PHONE]: '',
-
-    [FORM_FIELD_NAMES.SELECTED_PLAN]: '',
-    [FORM_FIELD_NAMES.PLAN_PRICE]: 0,
-    [FORM_FIELD_NAMES.IS_YEARLY]: false,
-
-    [FORM_FIELD_NAMES.SELECTED_ADDONS]: [],
+    name: '',
+    email: '',
+    phone: '',
+    selectedPlan: '',
+    isYearly: false,
+    pickedAddons: [],
 };
 
-const initialSteps = [
-    <PersonalInfo/>,    // page 1
-    <SelectPlan/>,      // page 2
-    <PickAddons/>,      // page 3
-    <FinishingUp/>,     // page 4
-]
-
+const pagesCount = 4;
 
 export const MultiStepForm = () => {
     const {
         currentStepIndex,
-        step,
         goTo,
         next,
         back,
-    } = useMultiStepForm(initialSteps);
+    } = useMultiStepForm(pagesCount);
+
+    const initialSteps = [
+        <PersonalInfo/>,                                            // page 1
+        <SelectPlan name="selectedPlan" plans={plans}/>,            // page 2
+        <PickAddons name="pickedAddons" addons={addons}/>,          // page 3
+        <FinishingUp plans={plans} addons={addons} goTo={goTo}/>,   // page 4
+    ]
 
     const handleGoto = (i: number) => {
         goTo(i);
@@ -67,7 +64,7 @@ export const MultiStepForm = () => {
                         {formik?.submitCount > 0 ? <Section><Thanks/></Section> :
                             <>
                                 <Section>
-                                    {step}
+                                    {initialSteps[currentStepIndex]}
                                 </Section>
 
                                 <Bottom justify={currentStepIndex > 0 ? 'space-between' : 'end'}>

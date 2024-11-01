@@ -1,64 +1,36 @@
 import {useField, useFormikContext} from "formik";
 import {RadioInput} from "../../RadioInput/RadioInput.tsx";
-import {IPlanOption} from "../pages/SelectPlan.tsx";
-import {ChangeEvent, useCallback} from "react";
+import {useCallback} from "react";
 import {ToggleSwitch} from "../../ToggleSwitch/ToggleSwitch.tsx";
 import {Li} from "../../../global/global.styled.ts";
 import {FORM_FIELD_NAMES} from "../../../global/сonstants.ts";
+import {IPlan} from "../../../global/types.ts";
 
 interface IFormRadioGroupProps {
-    name: string,
-    options: IPlanOption[],
+    name: string;
+    plans: IPlan[],
     hasYearlyTrigger?: boolean,
 }
 
 interface IFormRadioContextValues {
     isYearly: boolean;
-    plan: string;
-    price: number;
 }
 
 
-export const FormRadioGroup = ({name, options, hasYearlyTrigger = false}: IFormRadioGroupProps) => {
+export const FormRadioGroup = ({name, plans, hasYearlyTrigger = false}: IFormRadioGroupProps) => {
     const [field, meta] = useField(name);
-    const {values, setFieldValue} = useFormikContext<IFormRadioContextValues>();
-    console.log(values)
-    const {isYearly, plan} = values;
+    const {values: {isYearly}, setFieldValue} = useFormikContext<IFormRadioContextValues>();
 
-    const setNewPrice = useCallback(async (value: string, isYearly: boolean) => {
-        const selectedPlan = options.find(option => option.value === value);
-        if (selectedPlan) {
-            const newPrice = isYearly ? selectedPlan.yearlyPrice : selectedPlan.monthlyPrice;
-            await setFieldValue(FORM_FIELD_NAMES.PLAN_PRICE, newPrice)
-        }
-    }, [options, setFieldValue])
-
-    const toggleIsYearly = useCallback(async () => {
-        const newIsYearly = !isYearly
-        await setFieldValue(FORM_FIELD_NAMES.IS_YEARLY, newIsYearly);
-        if (plan)
-            await setNewPrice(plan, newIsYearly);
-    }, [isYearly, setFieldValue, plan, setNewPrice]);
-
-    const handlePlanChange = useCallback(async (event: ChangeEvent<HTMLInputElement>) => {
-        field.onChange(event);
-        await setNewPrice(event.target.value, isYearly);
-    }, [field, setNewPrice, isYearly]);
+    const toggleIsYearly = useCallback( () => {
+        void setFieldValue(FORM_FIELD_NAMES.IS_YEARLY, !isYearly);
+    }, [setFieldValue, isYearly])
 
     return (
         <>
             <ul>
-                {options.map(({
-                                  label,
-                                  value,
-                                  color,
-                                  monthlyPrice,
-                                  yearlyPrice,
-                                  currency,
-                                  icon
-                              }: IPlanOption) => (
+                {plans.map(({value, label, color, yearlyPrice, monthlyPrice, currency, icon}: IPlan) => (
                     <Li key={value}>
-                        <RadioInput name={field.name}
+                        <RadioInput name={name}
                                     label={label}
                                     value={value}
                                     color={color}
@@ -66,9 +38,10 @@ export const FormRadioGroup = ({name, options, hasYearlyTrigger = false}: IFormR
                                     currency={currency}
                                     isYearly={isYearly}
                                     icon={icon}
-                                    checked={field.value === value}
-                                    onChange={handlePlanChange}
-                                    onBlur={field.onBlur}/>
+                                    checked={field?.value === value}
+                                    onChange={field.onChange}
+                                    onBlur={field.onBlur}
+                        />
                     </Li>
                 ))
                 }
