@@ -1,4 +1,5 @@
 import {css} from 'styled-components';
+import {DESKTOP_BP} from "./breakpoints.ts";
 
 export const typography = {
     heading: css`
@@ -7,6 +8,10 @@ export const typography = {
         letter-spacing: 0;
         font-family: 'Ubuntu', Roboto, sans-serif;
         font-weight: 700;
+        
+        @media screen and ${DESKTOP_BP} {
+            font-size: 32px;
+        }
     `,
     bodyLarge: css`
         font-size: 16px;

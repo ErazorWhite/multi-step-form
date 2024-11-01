@@ -40,7 +40,7 @@ export const RadioInput = ({
                               onChange={onChange}
                               onBlur={onBlur}
             />
-            <RadioLabelBox htmlFor={value} alignItems="flex-start">
+            <RadioLabelBox htmlFor={value} alignItems="flex-start" flexDirection="column">
                 <RadioIconBox backgroundColor={color}>
                     {icon}
                 </RadioIconBox>

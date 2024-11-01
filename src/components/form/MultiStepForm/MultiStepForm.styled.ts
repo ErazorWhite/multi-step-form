@@ -1,56 +1,38 @@
-import styled, {css} from "styled-components";
+import styled from "styled-components";
 import {Form} from "formik";
+import {DESKTOP_BP} from "../../../global/breakpoints.ts";
 
 export const StyledForm = styled(Form)`
     height: 100%;
     display: flex;
     flex-direction: column;
-`
-
-// Navigation
-
-export const Nav = styled.nav`
-    background-image: url('/src/assets/backgrounds/background_mobile.svg');
-    background-size: cover;
-    min-height: 172px;
-    padding-top: 32px;
-`
-
-export const Ul = styled.ul`
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    color: var(--color-white);
-`
-
-interface ILi {
-    isActive: boolean;
-}
-
-export const Li = styled.li.withConfig({shouldForwardProp: (prop) => prop !== "isActive"})<ILi>`
-    height: 33px;
-    width: 33px;
-    text-align: center;
-    align-content: center;
-    border: 1px solid var(--color-white);
-    border-radius: 50%;
-
-    font-weight: 700;
-    font-size: 14px;
-
-    ${({isActive}) => isActive && css`
-        color: var(--color-denim);
-        background-color: var(--color-light-blue);
-    `}
     
-    &:hover {
-        color: var(--color-denim);
-        background-color: var(--color-light-blue);
-        transition: var(--animation);
+    @media screen and ${DESKTOP_BP} {
+        flex-direction: row;
+        max-height: 600px;
+
+        background-color: var(--color-white);
+        border-radius: 15px;
+        padding: 16px;
     }
 `
 
 // Main Section
+
+export const DesktopDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    
+    @media screen and ${DESKTOP_BP} {
+        display: flex;
+        flex-direction: column;
+        padding: 46px 100px 16px 100px;
+        flex-shrink: 0;
+        height: 100%;
+        width: 650px;
+    }
+`
 
 export const Section = styled.section`
     background-color: var(--color-white);
@@ -58,6 +40,13 @@ export const Section = styled.section`
     border-radius: 10px;
     padding: 32px 24px;
     overflow: auto;
+    box-shadow: 0 25px 40px -20px var(--color-black-opacity);
+    
+    @media screen and ${DESKTOP_BP} {
+        margin: 0;
+        box-shadow: none;
+        padding: 0;
+    }
 `
 
 // Bottom
@@ -67,10 +56,14 @@ interface IBottom {
 }
 
 export const Bottom = styled.div.withConfig({shouldForwardProp: (prop) => prop !== "justify"})<IBottom>`
+    display: flex;
     margin-top: auto;
     padding: 16px;
-    display: flex;
     min-height: 72px;
     background-color: var(--color-white);
     justify-content: ${({justify}) => justify};
+    
+    @media screen and ${DESKTOP_BP} {
+        //margin: 0;
+    }
 `

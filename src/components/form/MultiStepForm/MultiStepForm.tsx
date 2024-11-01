@@ -1,6 +1,6 @@
-import {Bottom, Li, Nav, Section, StyledForm, Ul} from "./MultiStepForm.styled.ts";
+import {Bottom, DesktopDiv, Section, StyledForm,} from "./MultiStepForm.styled.ts";
 import {Formik} from "formik";
-import {useCallback} from "react";
+import {FC, useCallback} from "react";
 import {SelectPlan} from "../pages/SelectPlan.tsx";
 import {PersonalInfo} from "../pages/PersonalInfo.tsx";
 import {PickAddons} from "../pages/PickAddons.tsx";
@@ -9,6 +9,7 @@ import {Thanks} from "../pages/Thanks/Thanks.tsx";
 import {useMultiStepForm} from "../../../hooks/useMultiStepForm.ts";
 import {Button} from "../../Button/Button.tsx";
 import {addons, plans} from "../../../global/data.ts";
+import {Navigation} from "../../Navigation/Navigation.tsx";
 
 const initialValues = {
     name: '',
@@ -21,7 +22,7 @@ const initialValues = {
 
 const pagesCount = 4;
 
-export const MultiStepForm = () => {
+export const MultiStepForm: FC = () => {
     const {
         currentStepIndex,
         goTo,
@@ -50,23 +51,14 @@ export const MultiStepForm = () => {
             <Formik initialValues={initialValues} onSubmit={handleSubmit}>
                 {formik => (
                     <StyledForm>
-                        <Nav>
-                            <Ul>
-                                {initialSteps.map((_, i) => (
-                                    <Li key={i}
-                                        isActive={i === currentStepIndex}
-                                        onClick={() => handleGoto(i)}>{i + 1}
-                                    </Li>
-                                ))}
-                            </Ul>
-                        </Nav>
+
+                        <Navigation pageCount={pagesCount} goTo={goTo} currentStepIndex={currentStepIndex}/>
 
                         {formik?.submitCount > 0 ? <Section><Thanks/></Section> :
-                            <>
+                            <DesktopDiv>
                                 <Section>
                                     {initialSteps[currentStepIndex]}
                                 </Section>
-
                                 <Bottom justify={currentStepIndex > 0 ? 'space-between' : 'end'}>
                                     {currentStepIndex > 0 &&
                                         <Button onClick={back} type='button' variant="back">Go back</Button>}
@@ -77,7 +69,7 @@ export const MultiStepForm = () => {
                                     {currentStepIndex === initialSteps.length - 1 &&
                                         <Button type='submit' variant="submit">Confirm</Button>}
                                 </Bottom>
-                            </>
+                            </DesktopDiv>
                         }
                     </StyledForm>
                 )}

@@ -5,6 +5,7 @@ import {ToggleSwitch} from "../../ToggleSwitch/ToggleSwitch.tsx";
 import {Li} from "../../../global/global.styled.ts";
 import {FORM_FIELD_NAMES} from "../../../global/сonstants.ts";
 import {IPlan} from "../../../global/types.ts";
+import {Ul} from "./FormRadioGroup.styled.ts";
 
 interface IFormRadioGroupProps {
     name: string;
@@ -27,9 +28,9 @@ export const FormRadioGroup = ({name, plans, hasYearlyTrigger = false}: IFormRad
 
     return (
         <>
-            <ul>
+            <Ul>
                 {plans.map(({value, label, color, yearlyPrice, monthlyPrice, currency, icon}: IPlan) => (
-                    <Li key={value}>
+                    <Li key={value} lastMargin={24}>
                         <RadioInput name={name}
                                     label={label}
                                     value={value}
@@ -45,7 +46,7 @@ export const FormRadioGroup = ({name, plans, hasYearlyTrigger = false}: IFormRad
                     </Li>
                 ))
                 }
-            </ul>
+            </Ul>
             {meta.touched && meta.error ? (
                 <div>{meta.error}</div>
             ) : null}

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {DESKTOP_BP} from "../../global/breakpoints.ts";
 
 interface IRadioIconThumb {
     backgroundColor: string;
@@ -19,10 +20,13 @@ export const RadioIconBox = styled.span.withConfig({shouldForwardProp: (prop) =>
 
 export const Price = styled.span`
     display: block;
-    margin: 7px 0 0 0;
+    margin: 7px 0 3px 0;
     font-size: 14px;
     font-weight: 400;
     color: var(--color-grey);
+    @media screen and ${DESKTOP_BP} {
+        margin: 7px 0 6px 0;
+    }
 `
 
 export const ExtraDetails = styled.span`

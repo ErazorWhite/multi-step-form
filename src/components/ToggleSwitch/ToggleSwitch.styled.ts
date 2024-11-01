@@ -18,9 +18,10 @@ interface ToggleOptionProps {
 }
 
 export const ToggleOption = styled.div.withConfig({shouldForwardProp: (prop) => prop !== "active"})<ToggleOptionProps>`
-  font-weight: 500;
-  color: ${({ active }) => (active ? 'var(--color-denim)' : 'var(--color-gray)')};
-  transition: color 0.3s;
+    font-size: 14px;
+    font-weight: 500;
+    color: ${({active}) => (active ? 'var(--color-denim)' : 'var(--color-grey)')};
+    transition: color 0.3s;
 `;
 
 export const ToggleContainer = styled.div`

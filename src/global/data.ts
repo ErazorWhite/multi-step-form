@@ -43,3 +43,10 @@ export const addons: IAddon[] = [
         currency: currency,
     },
 ]
+
+export const navPages = [
+    "YOUR INFO",
+    "SELECT PLAN",
+    "ADD-ONS",
+    "SUMMARY",
+]

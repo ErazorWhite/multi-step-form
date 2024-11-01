@@ -10,8 +10,7 @@ export const StyledContainer = styled.div`
     align-items: center;
 
     @media screen and ${DESKTOP_BP} {
-        max-width: 1088px;
-        
-        padding-top: 200px;
+        max-width: 980px;
+        padding-top: 100px;
     }
 `

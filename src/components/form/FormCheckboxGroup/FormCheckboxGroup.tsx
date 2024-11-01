@@ -1,7 +1,8 @@
 import {CheckBoxInput} from "../../CheckBoxInput/CheckBoxInput.tsx";
-import {Li} from "../../../global/global.styled.ts";
 import {useField, useFormikContext} from "formik";
 import {IAddon} from "../../../global/types.ts";
+import {Li} from "../../../global/global.styled.ts";
+import {Ul} from "./FormCheckboxGroup.styled.ts";
 
 interface IFormCheckBoxGroupProps {
     name: string;
@@ -17,7 +18,7 @@ export const FormCheckboxGroup = ({name, options}: IFormCheckBoxGroupProps) => {
     const {values: {isYearly}} = useFormikContext<IFormCheckBoxContextValues>();
 
     return (
-        <ul>
+        <Ul>
             {options.map(({label, value, description, currency, yearlyPrice, monthlyPrice}) => (
                 <Li key={value}>
                     <CheckBoxInput name={name}
@@ -33,6 +34,6 @@ export const FormCheckboxGroup = ({name, options}: IFormCheckBoxGroupProps) => {
                     />
                 </Li>
             ))}
-        </ul>
+        </Ul>
     )
 }

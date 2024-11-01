@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {DESKTOP_BP} from "../../../global/breakpoints.ts";
 
 export const FormInputLabel = styled.label`
     font-size: 12px;
@@ -11,6 +12,11 @@ export const FormInputLabel = styled.label`
     margin: 0 0 3px 0;
     
     overflow: scroll;
+    
+    @media screen and ${DESKTOP_BP} {
+        font-size: 14px;
+        margin: 0 0 8px 0;
+    }
 `
 
 export const FormInputField = styled.input`
@@ -24,4 +30,9 @@ export const FormInputField = styled.input`
     width: 100%;
     border: 1px solid var(--сolor-border);
     border-radius: 4px;
+    
+    @media screen and ${DESKTOP_BP} {
+        font-size: 16px;
+        margin: 0 0 24px 0;
+    }
 `
