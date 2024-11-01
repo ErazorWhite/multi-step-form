@@ -11,6 +11,6 @@ export const PageBoxHeading = styled.h1`
 export const PageBoxDescription = styled.p`
     ${typography.bodyLarge};
     margin: 0 0 22px 0;
-    color: var(--color-gray);
+    color: var(--color-grey);
     overflow: auto;
 `

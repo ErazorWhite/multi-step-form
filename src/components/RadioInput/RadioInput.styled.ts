@@ -22,7 +22,7 @@ export const Price = styled.span`
     margin: 7px 0 0 0;
     font-size: 14px;
     font-weight: 400;
-    color: var(--color-gray);
+    color: var(--color-grey);
 `
 
 export const ExtraDetails = styled.span`

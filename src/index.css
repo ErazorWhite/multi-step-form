@@ -18,8 +18,8 @@
     --color-pink: #F9818E; /* Strawberry red */
 
     /* Neutral */
-    --color-gray: #9699AA; /* Cool gray */
-    --color-light-gray: #D6D9E6; /* Light gray */
+    --color-grey: #9699AA; /* Cool gray */
+    --color-light-grey: #D6D9E6; /* Light gray */
     --color-very-light-grey: #F8F9FF; /* Magnolia */
     --color-bg: #EFF5FF; /* Alabaster */
     --color-white: #FFFFFF; /* White  */
@@ -28,6 +28,7 @@
     --сolor-border: #D6D9E6;
     --color-orange: #FFAF7E;
     --color-error: #EE374A;
+    --color-pink-dark: #E96170; /* Strawberry dark red */
 
     /* Animation */
     --animation: color 150ms ease-in, background-color 150ms ease-in, border-color 150ms ease-in;

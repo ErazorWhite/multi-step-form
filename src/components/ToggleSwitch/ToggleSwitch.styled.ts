@@ -9,7 +9,7 @@ export const ToggleMainBlock = styled.button`
     width: 100%;
     background-color: var(--color-very-light-grey);
     border-radius: 8px;
-    
+
     overflow: auto;
 `
 

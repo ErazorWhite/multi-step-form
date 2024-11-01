@@ -8,9 +8,9 @@ export const CheckmarkBox = styled.span`
     align-items: center;
     height: 20px;
     width: 20px;
-    border: 1px solid var(--color-light-gray);
+    border: 1px solid var(--color-light-grey);
     border-radius: 4px;
-    
+
     ${StyledRadioInput}:checked ~ ${RadioLabelBox} > & {
         background-color: var(--color-purple);
         stroke: var(--color-white);
@@ -23,7 +23,7 @@ export const CheckmarkBoxLabel = styled.span`
 export const CheckmarkBoxDescription = styled.span`
     display: block;
     font-size: 12px;
-    color: var(--color-gray);
+    color: var(--color-grey);
 `
 export const CheckmarkBoxPrice = styled.span`
     font-size: 12px;

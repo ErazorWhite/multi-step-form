@@ -5,7 +5,7 @@ import {SelectPlan} from "../pages/SelectPlan.tsx";
 import {PersonalInfo} from "../pages/PersonalInfo.tsx";
 import {PickAddons} from "../pages/PickAddons.tsx";
 import {FinishingUp} from "../pages/FinishingUp.tsx";
-import {Thanks} from "../pages/Thanks.tsx";
+import {Thanks} from "../pages/Thanks/Thanks.tsx";
 import {useMultiStepForm} from "../../../hooks/useMultiStepForm.ts";
 import {Button} from "../../Button/Button.tsx";
 import {addons, plans} from "../../../global/data.ts";

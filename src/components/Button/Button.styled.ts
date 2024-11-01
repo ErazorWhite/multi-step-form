@@ -8,6 +8,7 @@ interface StyledButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 export const StyledButton = styled.button.withConfig({shouldForwardProp: (prop) => prop !== "variant"})<StyledButtonProps>`
     padding: 12px 16px;
     font-size: 14px;
+    font-weight: 500;
     overflow: hidden;
     color: ${({variant}) => {
         switch (variant) {

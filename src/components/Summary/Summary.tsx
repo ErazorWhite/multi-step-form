@@ -1,5 +1,14 @@
 import {FC, useCallback} from "react";
 import {IAddon, IPlan} from "../../global/types.ts";
+import {
+    SummaryAddonDetails,
+    SummaryAddonLabel,
+    SummaryChangeButton,
+    SummaryContainer,
+    SummaryPlanDetails,
+    SummaryPlanPrice,
+    SummarySelectedPlanLabel, SummaryTotalDetails, SummaryTotalLabel, SummaryTotalPrice
+} from "./Summary.styled.ts";
 
 type Props = { plan?: IPlan, addons: IAddon[], isYearly: boolean, goTo: (i: number) => void };
 
@@ -16,39 +25,41 @@ export const Summary: FC<Props> = ({plan, addons, isYearly, goTo}) => {
 
     return (
         <>
-            <div>
-                <div>
+            <SummaryContainer>
+                <SummaryPlanDetails>
                     <div>
-                        <p>{plan?.label} ({isYearly ? 'Yearly' : 'Monthly'})</p>
-                        <button type="button" onClick={() => {
+                        <SummarySelectedPlanLabel>{plan?.label} ({isYearly ? 'Yearly' : 'Monthly'})</SummarySelectedPlanLabel>
+                        <SummaryChangeButton type="button" onClick={() => {
                             goTo(1)
                         }}>Change
-                        </button>
+                        </SummaryChangeButton>
                     </div>
-                    <span>
+                    <SummaryPlanPrice>
                         {plan ? formatPrice(
                             isYearly ? plan?.yearlyPrice : plan?.monthlyPrice,
                             plan?.currency
                         ) : ''}
-                    </span>
-                </div>
+                    </SummaryPlanPrice>
+                </SummaryPlanDetails>
                 <ul>
                     {addons.map((addon) => (
-                        <li key={addon.value}>
-                            <p>{addon.label}</p>
+                        <SummaryAddonDetails key={addon.value}>
+                            <SummaryAddonLabel>{addon.label}</SummaryAddonLabel>
                             <span>
                                 +{formatPrice(
                                 isYearly ? addon.yearlyPrice : addon.monthlyPrice,
                                 addon.currency
                             )}
                             </span>
-                        </li>
+                        </SummaryAddonDetails>
                     ))}
                 </ul>
-            </div>
+            </SummaryContainer>
 
-            <p>Total (per {isYearly ? "year" : "month"})</p>
-            <span>+{formatPrice(calculateTotalPrice(), '$')}</span>
+            <SummaryTotalDetails>
+                <SummaryTotalLabel>Total (per {isYearly ? "year" : "month"})</SummaryTotalLabel>
+                <SummaryTotalPrice>+{formatPrice(calculateTotalPrice(), '$')}</SummaryTotalPrice>
+            </SummaryTotalDetails>
         </>
     )
 }
