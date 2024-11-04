@@ -1,6 +1,6 @@
-import {ExtraDetails, Price, RadioIconBox} from "./RadioInput.styled.ts";
+import {ExtraDetails, Label, Price, RadioIconBox} from "./RadioInput.styled.ts";
 import {ChangeEventHandler, FocusEventHandler, ReactNode} from "react";
-import {RadioLabelBox, StyledRadioInput} from "../LabelInputBox/LabelInputBox.styled.ts";
+import {LabelBox, StyledInput} from "../LabelInputBox/LabelInputBox.styled.ts";
 
 export interface IRadioInput {
     name: string;
@@ -31,25 +31,25 @@ export const RadioInput = ({
                            }: IRadioInput) => {
     return (
         <>
-            <StyledRadioInput className="visually-hidden"
-                              id={value}
-                              value={value}
-                              type="radio"
-                              name={name}
-                              checked={checked}
-                              onChange={onChange}
-                              onBlur={onBlur}
+            <StyledInput className="visually-hidden"
+                         id={value}
+                         value={value}
+                         type="radio"
+                         name={name}
+                         checked={checked}
+                         onChange={onChange}
+                         onBlur={onBlur}
             />
-            <RadioLabelBox htmlFor={value} alignItems="flex-start" flexDirection="column">
+            <LabelBox htmlFor={value} alignItems="flex-start" flexDirection="column">
                 <RadioIconBox backgroundColor={color}>
                     {icon}
                 </RadioIconBox>
                 <div>
-                    {label}
+                    <Label>{label}</Label>
                     <Price>{`${currency}${price}/${isYearly ? 'yr' : 'mo'}`}</Price>
                     {isYearly && <ExtraDetails>2 months free</ExtraDetails>}
                 </div>
-            </RadioLabelBox>
+            </LabelBox>
         </>
     )
 }

@@ -10,6 +10,21 @@ import {useMultiStepForm} from "../../../hooks/useMultiStepForm.ts";
 import {Button} from "../../Button/Button.tsx";
 import {addons, plans} from "../../../global/data.ts";
 import {Navigation} from "../../Navigation/Navigation.tsx";
+import * as Yup from 'yup';
+import {MAXLENGTH_NAME} from "../../../global/сonstants.ts";
+import {PHONE_REGEXP} from "../../../global/regexp.ts";
+
+const multiStepFormValidationSchema = Yup.object({
+    name: Yup.string()
+        .max(MAXLENGTH_NAME, `Must be ${MAXLENGTH_NAME} characters or less`)
+        .required('This field is required'),
+    email: Yup.string()
+        .email()
+        .required('This field is required'),
+    phone: Yup.string()
+        .matches(PHONE_REGEXP, 'Incorrect phone number format, it should look like "+1 234 567 890"')
+        .required('Required'),
+});
 
 const initialValues = {
     name: '',
@@ -37,10 +52,6 @@ export const MultiStepForm: FC = () => {
         <FinishingUp plans={plans} addons={addons} goTo={goTo}/>,   // page 4
     ]
 
-    const handleGoto = (i: number) => {
-        goTo(i);
-    }
-
     const handleSubmit = useCallback((values) => {
         console.log(values);
     }, []);
@@ -48,7 +59,8 @@ export const MultiStepForm: FC = () => {
     return (
         <>
 
-            <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+            <Formik initialValues={initialValues} onSubmit={handleSubmit}
+                    validationSchema={multiStepFormValidationSchema}>
                 {formik => (
                     <StyledForm>
 

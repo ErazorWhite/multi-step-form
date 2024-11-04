@@ -1,4 +1,4 @@
-import {RadioLabelBox, StyledRadioInput} from "../LabelInputBox/LabelInputBox.styled.ts";
+import {LabelBox, StyledInput} from "../LabelInputBox/LabelInputBox.styled.ts";
 import {CheckmarkIcon} from "../icons/CheckmarkIcon.tsx";
 import {
     CheckmarkBox,
@@ -35,16 +35,16 @@ export const CheckBoxInput = ({
                               }: ICheckboxInput) => {
     return (
         <>
-            <StyledRadioInput className="visually-hidden" type="checkbox" id={value} name={name} value={value}
-                              checked={checked} onChange={onChange} onBlur={onBlur}/>
-            <RadioLabelBox alignItems="center" htmlFor={value}>
+            <StyledInput className="visually-hidden" type="checkbox" id={value} name={name} value={value}
+                         checked={checked} onChange={onChange} onBlur={onBlur}/>
+            <LabelBox alignItems="center" htmlFor={value}>
                 <CheckmarkBox>{checked && <CheckmarkIcon/>}</CheckmarkBox>
                 <div>
                     <CheckmarkBoxLabel>{label}</CheckmarkBoxLabel>
                     <CheckmarkBoxDescription>{description}</CheckmarkBoxDescription>
                 </div>
                 <CheckmarkBoxPrice>{`+${currency}${price}/${isYearly ? 'yr' : 'mo'}`}</CheckmarkBoxPrice>
-            </RadioLabelBox>
+            </LabelBox>
         </>
     )
 }

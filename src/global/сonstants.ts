@@ -12,3 +12,5 @@ export const FORM_FIELD_NAMES = {
     // page 3
     PICKED_ADDONS: 'pickedAddons',
 };
+
+export const MAXLENGTH_NAME = 42;

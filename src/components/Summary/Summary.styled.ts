@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {DESKTOP_BP} from "../../global/breakpoints.ts";
 
 export const SummaryContainer = styled.div`
     padding: 16px;
@@ -9,6 +10,11 @@ export const SummaryContainer = styled.div`
 
     font-size: 14px;
     line-height: 20px;
+    
+    @media screen and ${DESKTOP_BP} {
+    font-size: 16px;
+        
+    }
 `
 
 export const SummaryPlanDetails = styled.div`
@@ -18,7 +24,6 @@ export const SummaryPlanDetails = styled.div`
     padding: 0 0 12px 0;
     margin: 0 0 12px 0;
     border-bottom: 1px solid var(--color-light-grey);
-
 `
 
 export const SummarySelectedPlanLabel = styled.span`
@@ -29,6 +34,7 @@ export const SummarySelectedPlanLabel = styled.span`
 export const SummaryChangeButton = styled.button`
     padding: 0;
     border: none;
+    font-size: 14px;
     background-color: transparent;
     text-decoration: underline;
 
@@ -47,6 +53,10 @@ export const SummaryAddonDetails = styled.div`
     &:last-of-type {
         margin: 0;
     }
+    
+    @media screen and ${DESKTOP_BP} {
+        font-size: 14px;
+    }
 `
 
 export const SummaryAddonLabel = styled.span`
@@ -56,15 +66,20 @@ export const SummaryAddonLabel = styled.span`
 export const SummaryTotalDetails = styled.span`
     display: flex;
     justify-content: space-between;
+    
 `
 
 export const SummaryTotalLabel = styled.span`
     color: var(--color-grey);
     margin: 0 0 0 16px;
-    font-weight: 14px;
+    font-size: 14px;
 `
 
 export const SummaryTotalPrice = styled.span`
     font-weight: 700;
     color: var(--color-purple);
+    
+    @media screen and ${DESKTOP_BP} {
+        font-size: 20px;
+    }
 `

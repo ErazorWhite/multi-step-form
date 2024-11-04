@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import {DESKTOP_BP} from "../../global/breakpoints.ts";
 
-interface IRadioLabelBox {
+interface ILabelBox {
     alignItems?: "flex-start" | "center";
     flexDirection?: "column" | "row";
 }
 
-export const RadioLabelBox = styled.label.withConfig({ shouldForwardProp: (prop) => !['alignItems', 'flexDirection'].includes(prop), })<IRadioLabelBox>`
+export const LabelBox = styled.label.withConfig({ shouldForwardProp: (prop) => !['alignItems', 'flexDirection'].includes(prop), })<ILabelBox>`
     display: flex;
     align-items: ${({alignItems = "flex-start"}) => alignItems};
     gap: 14px;
@@ -19,7 +19,7 @@ export const RadioLabelBox = styled.label.withConfig({ shouldForwardProp: (prop)
     letter-spacing: 0;
     line-height: 20px;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 400;
 
     overflow: auto;
     
@@ -28,8 +28,8 @@ export const RadioLabelBox = styled.label.withConfig({ shouldForwardProp: (prop)
         gap: 39px;
     }
 `
-export const StyledRadioInput = styled.input`
-    &:checked + ${RadioLabelBox} {
+export const StyledInput = styled.input`
+    &:checked + ${LabelBox} {
         border: 1px solid var(--color-purple);
     }
 `

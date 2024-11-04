@@ -1,0 +1,1 @@
+export const PHONE_REGEXP = /^\\+\\d\\s\\d{3}\\s\\d{3}\\s\\d{3}$/g;

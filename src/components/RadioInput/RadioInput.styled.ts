@@ -16,6 +16,13 @@ export const RadioIconBox = styled.span.withConfig({shouldForwardProp: (prop) =>
     border-radius: 50%;
     fill: white;
     background-color: ${({backgroundColor}) => `var(--color-${backgroundColor})`};
+    @media screen and ${DESKTOP_BP} {
+        margin: 0;
+    }
+`
+
+export const Label = styled.span`
+    font-weight: 500;
 `
 
 export const Price = styled.span`
