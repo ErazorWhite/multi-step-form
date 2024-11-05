@@ -31,6 +31,8 @@
     --color-pink-dark: #E96170; /* Strawberry dark red */
     --color-black: #000000;
     --color-black-opacity: #00000018;
+    --color-denim-active: #164A8A;
+    --color-purple-active: #928CFF;
 
     /* Animation */
     --animation: color 150ms ease-in, background-color 150ms ease-in, border-color 150ms ease-in;

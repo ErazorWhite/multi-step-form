@@ -13,7 +13,7 @@ export const StyledButton = styled.button.withConfig({shouldForwardProp: (prop) 
     font-size: 14px;
     font-weight: 500;
     overflow: hidden;
-    cursor: ${({disabled})=> disabled ? 'not-allowed' : 'pointer'};
+    cursor: ${({disabled}) => disabled ? 'not-allowed' : 'pointer'};
     color: ${({variant}) => {
         switch (variant) {
             case "back":
@@ -35,7 +35,28 @@ export const StyledButton = styled.button.withConfig({shouldForwardProp: (prop) 
                 return "var(--color-denim)";
         }
     }};
-    background-color: ${({disabled})=> disabled && 'var(--color-light-grey)'};
+    background-color: ${({disabled}) => disabled && 'var(--color-light-grey)'};
+    transition: var(--animation);
+
+    &:hover,
+    &:focus {
+        background-color: ${({disabled, variant}) => {
+            if (!disabled) {
+                switch (variant) {
+                    case "back":
+                        return "transparent";
+                    case "submit":
+                        return "var(--color-purple-active)";
+                    case "next":
+                    default:
+                        return "var(--color-denim-active)";
+                }
+            }
+        }
+        }
+    }
+;
+
     @media screen and ${DESKTOP_BP} {
         font-size: 16px;
         padding: 14px 25px;

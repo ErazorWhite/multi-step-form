@@ -1,7 +1,7 @@
 import {navPages} from "../../global/data.ts";
 import {FC} from "react";
 import {
-    Nav, NavUl, NavLi,
+    Nav, NavUl,
     NavNumberItemCircle,
     NavDesktopDetails, NavStepNumber, NavStepLabel, NavButton
 } from "./Navigation.styled.ts";
@@ -17,7 +17,7 @@ export const Navigation: FC<navigationProps> = ({pageCount, goTo, currentStepInd
     <Nav>
         <NavUl>
             {Array.from({length: pageCount}, (_, i) => (
-                <NavLi key={i}>
+                <li key={i}>
                     <NavButton onClick={() => goTo(i)} type="button" disabled={!isValid}>
                         <NavNumberItemCircle isActive={i === currentStepIndex}>{i + 1}</NavNumberItemCircle>
                         <NavDesktopDetails>
@@ -25,7 +25,7 @@ export const Navigation: FC<navigationProps> = ({pageCount, goTo, currentStepInd
                             <NavStepLabel>{navPages[i]}</NavStepLabel>
                         </NavDesktopDetails>
                     </NavButton>
-                </NavLi>
+                </li>
             ))}
         </NavUl>
     </Nav>

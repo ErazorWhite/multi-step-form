@@ -27,8 +27,6 @@ export const NavUl = styled.ul`
     }
 `
 
-export const NavLi = styled.li`
-`
 
 interface INavNumberItem {
     isActive: boolean;
@@ -48,11 +46,12 @@ export const NavNumberItemCircle  = styled.span.withConfig({shouldForwardProp: (
 
     ${({isActive}) => isActive && css`
         color: var(--color-denim);
-        background-color: var(--color-light-blue);
+        background-color: var(--color-sky-blue);
     `}
-    &:hover {
+    &:hover,
+    &:focus {
         color: var(--color-denim);
-        background-color: var(--color-light-blue);
+        background-color: var(--color-sky-blue);
         transition: var(--animation);
     }
 `

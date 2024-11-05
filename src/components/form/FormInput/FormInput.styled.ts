@@ -43,7 +43,12 @@ export const FormInputField = styled.input.withConfig({shouldForwardProp: (prop)
                              isInvalid
                          }) => isTouched && isInvalid ? "var(--color-error)" : "var(--color-border)"};
     border-radius: 4px;
+    transition: var(--animation);
 
+    &:hover,
+    &:focus {
+        border-color: var(--color-purple);
+    }
     @media screen and ${DESKTOP_BP} {
         font-size: 16px;
         margin: 0 0 24px 0;

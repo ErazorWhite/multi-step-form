@@ -37,8 +37,14 @@ export const SummaryChangeButton = styled.button`
     font-size: 14px;
     background-color: transparent;
     text-decoration: underline;
-
+    
+    transition: var(--animation);
     color: var(--color-grey);
+    
+    &:hover,
+    &:focus {
+        color: var(--color-purple);
+    }
 `
 
 export const SummaryPlanPrice = styled.span`

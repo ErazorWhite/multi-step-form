@@ -22,6 +22,12 @@ export const LabelBox = styled.label.withConfig({ shouldForwardProp: (prop) => !
     font-weight: 400;
 
     overflow: auto;
+    transition: var(--animation);
+    
+    &:hover,
+    &:focus {
+        border-color: var(--color-purple);
+    }
     
     @media screen and ${DESKTOP_BP} {
         flex-direction: ${({flexDirection = "row"})=> flexDirection};
@@ -31,5 +37,6 @@ export const LabelBox = styled.label.withConfig({ shouldForwardProp: (prop) => !
 export const StyledInput = styled.input`
     &:checked + ${LabelBox} {
         border: 1px solid var(--color-purple);
+        background-color: var(--color-very-light-grey);
     }
 `
