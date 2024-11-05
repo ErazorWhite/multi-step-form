@@ -1,26 +1,32 @@
-export const maskPhoneNumber = (input: string): string => {
-    input = input.replace(/[^\d+]/g, '');
+interface IMaskPhoneNumberReturn {
+    formattedValue: string,
+    newCursorPosition: number,
+}
 
-    console.log("INPUT: ", input);
-
-    // Move any "+" to start
-    if (input.match(/(?<!^)(\+)/g)) {
-        input = input.replace(/\+/g, '');
-        input = '+' + input;
-    }
+export const maskPhoneNumber = (rawValue: string, cursorPosition: number): IMaskPhoneNumberReturn => {
+    rawValue = rawValue.replace(/[^\d+]/g, '');
 
     // Change any start symbol to "+"
-    if (!input.startsWith("+")) input = input.replace(/./g, '+');
+    if (!rawValue.startsWith("+")) rawValue = rawValue.replace(/./g, '+');
+
+    // Move any "+" to start
+    rawValue = '+' + rawValue.replace(/\+/g, '');
 
     // Limit to 11
-    input = input.substring(0, 11);
+    rawValue = rawValue.substring(0, 11);
 
-    const numberWithoutCountryPart = input.replace(/(^\+\d|^\+)/g, ''); // Get numbers except country code
-    const countryCode = input.slice(0, 2); // Get country code
+    // Add spaces
+    let numberWithoutCountryPart = rawValue.substring(2); // Get numbers except country code
+    const countryCode = rawValue.slice(0, 2); // Get country code
 
-    if (input.length > 2) input = countryCode + ' ' + numberWithoutCountryPart.slice(0, 3);
-    if (input.length >= 6) input += ' ' + numberWithoutCountryPart.slice(3, 6);
-    if (input.length >= 10) input += ' ' + numberWithoutCountryPart.slice(6, 9);
+    numberWithoutCountryPart = numberWithoutCountryPart.replace(/.{1,3}/g, '$& ').trim();
+    rawValue = countryCode;
+    if (numberWithoutCountryPart.length > 0) {
+        rawValue += ' ' + numberWithoutCountryPart;
+    }
 
-    return input;
+    // Keep cursor position at the same place
+    if ((cursorPosition - 3) % 4 === 0) cursorPosition += 1;
+
+    return {formattedValue: rawValue, newCursorPosition: cursorPosition};
 };
