@@ -10,14 +10,15 @@ type navigationProps = {
     pageCount: number;
     goTo: (i: number) => void;
     currentStepIndex: number;
+    isValid: boolean;
 }
 
-export const Navigation: FC<navigationProps> = ({pageCount, goTo, currentStepIndex}) => (
+export const Navigation: FC<navigationProps> = ({pageCount, goTo, currentStepIndex, isValid}) => (
     <Nav>
         <NavUl>
             {Array.from({length: pageCount}, (_, i) => (
                 <NavLi key={i}>
-                    <NavButton onClick={() => goTo(i)} type="button">
+                    <NavButton onClick={() => goTo(i)} type="button" disabled={!isValid}>
                         <NavNumberItemCircle isActive={i === currentStepIndex}>{i + 1}</NavNumberItemCircle>
                         <NavDesktopDetails>
                             <NavStepNumber>STEP {i + 1}</NavStepNumber>

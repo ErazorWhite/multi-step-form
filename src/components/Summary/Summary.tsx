@@ -5,14 +5,19 @@ import {
     SummaryAddonLabel,
     SummaryChangeButton,
     SummaryContainer,
-    SummaryPlanDetails,
+    SummarySelectedPlanDetails,
     SummaryPlanPrice,
     SummarySelectedPlanLabel, SummaryTotalDetails, SummaryTotalLabel, SummaryTotalPrice
 } from "./Summary.styled.ts";
 
-type Props = { plan?: IPlan, addons: IAddon[], isYearly: boolean, goTo: (i: number) => void };
+interface ISummaryProps {
+    plan?: IPlan,
+    addons: IAddon[],
+    isYearly: boolean,
+    goTo: (i: number) => void
+}
 
-export const Summary: FC<Props> = ({plan, addons, isYearly, goTo}) => {
+export const Summary: FC<ISummaryProps> = ({plan, addons, isYearly, goTo}) => {
 
     const calculateTotalPrice = useCallback(() => {
         if (!plan) return 0;
@@ -26,21 +31,21 @@ export const Summary: FC<Props> = ({plan, addons, isYearly, goTo}) => {
     return (
         <>
             <SummaryContainer>
-                <SummaryPlanDetails>
+                <SummarySelectedPlanDetails>
                     <div>
                         <SummarySelectedPlanLabel>{plan?.label} ({isYearly ? 'Yearly' : 'Monthly'})</SummarySelectedPlanLabel>
                         <SummaryChangeButton type="button" onClick={() => {
-                            goTo(1)
+                            goTo(1) // Magic number :(
                         }}>Change
                         </SummaryChangeButton>
                     </div>
                     <SummaryPlanPrice>
-                        {plan ? formatPrice(
+                        {plan && formatPrice(
                             isYearly ? plan?.yearlyPrice : plan?.monthlyPrice,
                             plan?.currency
-                        ) : ''}
+                        )}
                     </SummaryPlanPrice>
-                </SummaryPlanDetails>
+                </SummarySelectedPlanDetails>
                 <ul>
                     {addons.map((addon) => (
                         <SummaryAddonDetails key={addon.value}>

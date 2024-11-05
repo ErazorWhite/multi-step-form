@@ -46,18 +46,3 @@ export const Section = styled.section`
         padding: 0;
     }
 `
-
-// Bottom
-
-interface IBottom {
-    justify: string;
-}
-
-export const Bottom = styled.div.withConfig({shouldForwardProp: (prop) => prop !== "justify"})<IBottom>`
-    display: flex;
-
-    padding: 16px;
-    min-height: 72px;
-    background-color: var(--color-white);
-    justify-content: ${({justify}) => justify};
-`

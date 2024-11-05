@@ -19,3 +19,12 @@ export interface IPlan {
     color: iconColors;
     icon: ReactNode;
 }
+
+export interface IFormValues {
+    name: string;
+    email: string;
+    phone: string;
+    selectedPlan: string;
+    isYearly: boolean;
+    pickedAddons: string[];
+}

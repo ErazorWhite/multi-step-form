@@ -17,7 +17,7 @@ export const SummaryContainer = styled.div`
     }
 `
 
-export const SummaryPlanDetails = styled.div`
+export const SummarySelectedPlanDetails = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;

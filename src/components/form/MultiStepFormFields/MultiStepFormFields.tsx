@@ -1,30 +1,39 @@
 import {Navigation} from "../../Navigation/Navigation.tsx";
-import {Bottom, DesktopDiv, Section, StyledForm} from "./MutliStepFormFields.styled.ts";
+import {DesktopDiv, Section, StyledForm} from "./MutliStepFormFields.styled.ts";
 import {Thanks} from "../pages/Thanks/Thanks.tsx";
-import {Button} from "../../Button/Button.tsx";
-import {useMultiStepForm} from "../../../hooks/useMultiStepForm.ts";
 import {PersonalInfo} from "../pages/PersonalInfo.tsx";
 import {SelectPlan} from "../pages/SelectPlan.tsx";
 import {addons, plans} from "../../../global/data.ts";
 import {PickAddons} from "../pages/PickAddons.tsx";
 import {FinishingUp} from "../pages/FinishingUp.tsx";
-import {FC} from "react";
-import {FormikProps, FormikValues} from "formik";
+import {FC, useEffect} from "react";
+import {FormikProps} from "formik";
+import {IFormValues} from "../../../global/types.ts";
+import {ButtonGroup} from "../../ButtonGroup/ButtonGroup.tsx";
 
-const pagesCount = 4;
+interface IMultiStepFormFieldsProps extends FormikProps<IFormValues> {
+    currentStepIndex: number;
+    goTo: (step: number) => void;
+    next: () => void;
+    back: () => void;
+    pagesCount: number
+}
 
-export const MultiStepFormFields: FC<FormikProps<FormikValues>> = ({submitCount, isValid}) => {
-    const {
-        currentStepIndex,
-        goTo,
-        next,
-        back,
-    } = useMultiStepForm(pagesCount);
+export const MultiStepFormFields: FC<IMultiStepFormFieldsProps> = ({
+                                                                       submitCount,
+                                                                       isValid,
+                                                                       validateForm,
+                                                                       currentStepIndex,
+                                                                       goTo,
+                                                                       next,
+                                                                       back,
+                                                                       pagesCount,
+                                                                   }) => {
+    useEffect(() => {
+        void validateForm();
+    }, [currentStepIndex, validateForm]);
 
-    console.log(isValid)
-    console.log(currentStepIndex)
-
-    const initialSteps = [
+    const steps = [
         <PersonalInfo/>,                                            // page 1
         <SelectPlan name="selectedPlan" plans={plans}/>,            // page 2
         <PickAddons name="pickedAddons" addons={addons}/>,          // page 3
@@ -33,23 +42,15 @@ export const MultiStepFormFields: FC<FormikProps<FormikValues>> = ({submitCount,
 
     return (
         <StyledForm>
-            <Navigation pageCount={pagesCount} goTo={goTo} currentStepIndex={currentStepIndex}/>
+            <Navigation pageCount={pagesCount} goTo={goTo} currentStepIndex={currentStepIndex} isValid={isValid}/>
 
             {submitCount > 0 ? <Section><Thanks/></Section> :
                 <DesktopDiv>
                     <Section>
-                        {initialSteps[currentStepIndex]}
+                        {steps[currentStepIndex]}
                     </Section>
-                    <Bottom justify={currentStepIndex > 0 ? 'space-between' : 'end'}>
-                        {currentStepIndex > 0 &&
-                            <Button onClick={back} type='button' variant="back" disabled={!isValid}>Go back</Button>}
-
-                        {currentStepIndex < initialSteps.length - 1 &&
-                            <Button onClick={next} type='button' variant="next" disabled={!isValid}>Next Step</Button>}
-
-                        {currentStepIndex === initialSteps.length - 1 &&
-                            <Button type='submit' variant="submit" disabled={!isValid}>Confirm</Button>}
-                    </Bottom>
+                    <ButtonGroup currentStepIndex={currentStepIndex} back={back} next={next} isValid={isValid}
+                                 stepsCount={steps.length}/>
                 </DesktopDiv>
             }
         </StyledForm>
