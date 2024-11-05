@@ -4,13 +4,16 @@ import {DESKTOP_BP} from "../../global/breakpoints.ts";
 
 interface StyledButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     variant?: "back" | "next" | "submit";
+    disabled?: boolean;
 }
 
 export const StyledButton = styled.button.withConfig({shouldForwardProp: (prop) => prop !== "variant"})<StyledButtonProps>`
+    min-width: 124px;
     padding: 12px 16px;
     font-size: 14px;
     font-weight: 500;
     overflow: hidden;
+    cursor: ${({disabled})=> disabled ? 'not-allowed' : 'pointer'};
     color: ${({variant}) => {
         switch (variant) {
             case "back":
@@ -32,6 +35,7 @@ export const StyledButton = styled.button.withConfig({shouldForwardProp: (prop) 
                 return "var(--color-denim)";
         }
     }};
+    background-color: ${({disabled})=> disabled && 'var(--color-light-grey)'};
     @media screen and ${DESKTOP_BP} {
         font-size: 16px;
         padding: 14px 25px;

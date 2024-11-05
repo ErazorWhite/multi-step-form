@@ -1,9 +1,9 @@
 interface IMaskPhoneNumberReturn {
     formattedValue: string,
-    newCursorPosition: number,
+    newCursorPosition?: number,
 }
 
-export const maskPhoneNumber = (rawValue: string, cursorPosition: number): IMaskPhoneNumberReturn => {
+export const maskPhoneNumber = (rawValue: string, cursorPosition?: number): IMaskPhoneNumberReturn => {
     rawValue = rawValue.replace(/[^\d+]/g, '');
 
     // Change any start symbol to "+"
@@ -26,7 +26,7 @@ export const maskPhoneNumber = (rawValue: string, cursorPosition: number): IMask
     }
 
     // Keep cursor position at the same place
-    if ((cursorPosition - 3) % 4 === 0) cursorPosition += 1;
+    if (cursorPosition && ((cursorPosition - 3) % 4 === 0)) cursorPosition += 1;
 
-    return {formattedValue: rawValue, newCursorPosition: cursorPosition};
+    return cursorPosition ? {formattedValue: rawValue, newCursorPosition: cursorPosition} : {formattedValue: rawValue};
 };

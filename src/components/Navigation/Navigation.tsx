@@ -3,7 +3,7 @@ import {FC} from "react";
 import {
     Nav, NavUl, NavLi,
     NavNumberItemCircle,
-    NavDesktopDetails, NavStepNumber, NavStepLabel
+    NavDesktopDetails, NavStepNumber, NavStepLabel, NavButton
 } from "./Navigation.styled.ts";
 
 type navigationProps = {
@@ -16,12 +16,14 @@ export const Navigation: FC<navigationProps> = ({pageCount, goTo, currentStepInd
     <Nav>
         <NavUl>
             {Array.from({length: pageCount}, (_, i) => (
-                <NavLi key={i} onClick={() => goTo(i)}>
-                    <NavNumberItemCircle isActive={i === currentStepIndex}>{i + 1}</NavNumberItemCircle>
-                    <NavDesktopDetails>
-                        <NavStepNumber>STEP {i + 1}</NavStepNumber>
-                        <NavStepLabel>{navPages[i]}</NavStepLabel>
-                    </NavDesktopDetails>
+                <NavLi key={i}>
+                    <NavButton onClick={() => goTo(i)} type="button">
+                        <NavNumberItemCircle isActive={i === currentStepIndex}>{i + 1}</NavNumberItemCircle>
+                        <NavDesktopDetails>
+                            <NavStepNumber>STEP {i + 1}</NavStepNumber>
+                            <NavStepLabel>{navPages[i]}</NavStepLabel>
+                        </NavDesktopDetails>
+                    </NavButton>
                 </NavLi>
             ))}
         </NavUl>

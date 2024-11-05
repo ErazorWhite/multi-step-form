@@ -1,6 +1,7 @@
 import {useField} from "formik";
-import {FormInputLabel, FormInputField} from "./FormInput.styled.ts";
+import {FormInputLabel, FormInputField, FormInputHeadingContainer} from "./FormInput.styled.ts";
 import {ChangeEvent, useRef} from "react";
+import {Error} from "../../../global/global.styled.ts";
 
 interface IFormInput {
     label: string,
@@ -8,7 +9,9 @@ interface IFormInput {
     placeholder?: string,
     type?: string,
     maxLength?: number,
-    maskFunction?: (value: string, cursorPosition?: number) => {formattedValue: string, newCursorPosition?: number},
+    pattern?: string,
+    maskFunction?: (value: string, cursorPosition?: number) => { formattedValue: string, newCursorPosition?: number },
+    required?: boolean,
 }
 
 export const FormInput = ({label, placeholder, maskFunction, ...props}: IFormInput) => {
@@ -34,13 +37,17 @@ export const FormInput = ({label, placeholder, maskFunction, ...props}: IFormInp
 
     return (
         <>
-            <FormInputLabel htmlFor={field.name}>{label}</FormInputLabel>
+            <FormInputHeadingContainer>
+                <FormInputLabel htmlFor={field.name}>{label}</FormInputLabel>
+                {meta.touched && meta.error &&
+                    <Error>{meta.error}</Error>}
+            </FormInputHeadingContainer>
             <FormInputField id={field.name} type="text" placeholder={placeholder}
                             ref={inputRef}
+                            isTouched={meta.touched}
+                            isInvalid={!!meta.error}
                             {...field} {...props}
                             onChange={handleChange}/>
-            {meta.touched && meta.error &&
-                <div className="error">{meta.error}</div>}
         </>
     )
 }

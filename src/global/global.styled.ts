@@ -20,3 +20,12 @@ export const Li = styled.li.withConfig({shouldForwardProp: (prop) => prop !== "l
         }
     }
 `
+
+export const Error = styled.span`
+    color: var(--color-error);
+    font-weight: 700;
+    font-size: 12px;
+    @media screen and ${DESKTOP_BP} {
+        font-size: 14px;
+    }
+`

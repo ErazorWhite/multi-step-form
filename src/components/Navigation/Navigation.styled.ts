@@ -6,11 +6,12 @@ export const Nav = styled.nav`
     background-size: cover;
     min-height: 172px;
     padding-top: 32px;
-    
+
     @media screen and ${DESKTOP_BP} {
         min-width: 274px;
-        padding: 40px 32px; 
+        padding: 40px 32px;
         background-image: url('/src/assets/backgrounds/background_desktop.svg');
+        border-radius: 15px;
     }
 `
 
@@ -22,15 +23,11 @@ export const NavUl = styled.ul`
 
     @media screen and ${DESKTOP_BP} {
         flex-direction: column;
+        gap: 32px;
     }
 `
 
 export const NavLi = styled.li`
-    @media screen and ${DESKTOP_BP} {
-        display: flex;
-        gap: 16px;
-        align-items: center;
-    }
 `
 
 interface INavNumberItem {
@@ -79,4 +76,17 @@ export const NavStepLabel = styled.span`
     font-weight: 700;
     letter-spacing: 1px;
     color: var(--color-white);
+`
+
+export const NavButton = styled.button`
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    color: inherit;
+    padding: 0;
+    @media screen and ${DESKTOP_BP} {
+        display: flex;
+        gap: 16px;
+        text-align: start;
+    }
 `
