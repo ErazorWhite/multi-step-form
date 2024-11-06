@@ -21,7 +21,7 @@ export const ButtonGroup: FC<IButtonGroup> = ({
     <ButtonsBlock>
       <ButtonWidthLimiter justify={currentStepIndex > 0 ? 'space-between' : 'end'}>
         {currentStepIndex > 0 && (
-          <Button onClick={back} type="button" variant="back" disabled={!isValid}>
+          <Button onClick={back} type="button" variant="back">
             Go back
           </Button>
         )}
