@@ -1,11 +1,15 @@
 import styled, { css } from 'styled-components';
-import { DESKTOP_BP } from '../../global/breakpoints.ts';
+import { DESKTOP_BP, MOBILE_BP } from '../../global/breakpoints.ts';
 
 export const Nav = styled.nav`
   background-image: url(./backgrounds/background_mobile.svg);
   background-size: cover;
   min-height: 172px;
   padding-top: 32px;
+
+  @media screen and ${MOBILE_BP} {
+    width: 100%;
+  }
 
   @media screen and ${DESKTOP_BP} {
     min-width: 274px;
@@ -51,12 +55,6 @@ export const NavNumberItemCircle = styled.span.withConfig({
       color: var(--color-denim);
       background-color: var(--color-sky-blue);
     `}
-  &:hover,
-    &:focus {
-    color: var(--color-denim);
-    background-color: var(--color-sky-blue);
-    transition: var(--animation);
-  }
 `;
 
 export const NavDesktopDetails = styled.div`
@@ -83,12 +81,18 @@ export const NavStepLabel = styled.span`
 export const NavButton = styled.button`
   display: flex;
   align-items: center;
+  width: 100%;
   background-color: transparent;
   color: inherit;
   padding: 0;
   @media screen and ${DESKTOP_BP} {
-    display: flex;
     gap: 16px;
     text-align: start;
+  }
+
+  &:hover ${NavNumberItemCircle}, &:focus ${NavNumberItemCircle} {
+    color: var(--color-denim);
+    background-color: var(--color-sky-blue);
+    transition: var(--animation);
   }
 `;

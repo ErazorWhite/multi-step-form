@@ -7,6 +7,7 @@ export const StyledForm = styled(Form)`
   flex-direction: column;
   @media screen and ${MOBILE_BP} {
     height: 100%;
+    align-items: center;
   }
   @media screen and ${DESKTOP_BP} {
     flex-direction: row;
@@ -15,15 +16,18 @@ export const StyledForm = styled(Form)`
     border-radius: 15px;
     padding: 16px;
   }
+  box-shadow: 0 25px 40px -20px var(--color-black-opacity);
 `;
 
 // Main Section
 
-export const DesktopDiv = styled.div`
+export const Article = styled.article`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 100%;
   @media screen and ${MOBILE_BP} {
+    align-items: center;
     height: 100%;
   }
   @media screen and ${DESKTOP_BP} {
@@ -38,7 +42,11 @@ export const Section = styled.section`
   margin: -73px 16px 0 16px;
   border-radius: 10px;
   padding: 32px 24px;
-  box-shadow: 0 25px 40px -20px var(--color-black-opacity);
+
+  @media screen and ${MOBILE_BP} {
+    max-width: 343px;
+    box-shadow: 0 25px 40px -20px var(--color-black-opacity);
+  }
 
   @media screen and ${DESKTOP_BP} {
     margin: 0;

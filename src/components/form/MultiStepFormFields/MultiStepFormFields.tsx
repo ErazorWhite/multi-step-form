@@ -1,5 +1,5 @@
 import { Navigation } from '../../Navigation/Navigation.tsx';
-import { DesktopDiv, Section, StyledForm } from './MutliStepFormFields.styled.ts';
+import { Article, Section, StyledForm } from './MutliStepFormFields.styled.ts';
 import { Thanks } from '../pages/Thanks/Thanks.tsx';
 import { PersonalInfo } from '../pages/PersonalInfo.tsx';
 import { SelectPlan } from '../pages/SelectPlan.tsx';
@@ -54,7 +54,7 @@ export const MultiStepFormFields: FC<IMultiStepFormFieldsProps> = ({
           <Thanks />
         </Section>
       ) : (
-        <DesktopDiv>
+        <Article>
           <Section>{steps[currentStepIndex]}</Section>
           <ButtonGroup
             currentStepIndex={currentStepIndex}
@@ -63,7 +63,7 @@ export const MultiStepFormFields: FC<IMultiStepFormFieldsProps> = ({
             isValid={isValid}
             stepsCount={steps.length}
           />
-        </DesktopDiv>
+        </Article>
       )}
     </StyledForm>
   );

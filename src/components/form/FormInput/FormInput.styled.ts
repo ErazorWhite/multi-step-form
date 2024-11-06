@@ -51,6 +51,10 @@ export const FormInputField = styled.input.withConfig({
     border-color: var(--color-purple);
   }
 
+  &::placeholder {
+    color: var(--color-grey);
+  }
+
   @media screen and ${DESKTOP_BP} {
     font-size: 16px;
     margin: 0 0 24px 0;

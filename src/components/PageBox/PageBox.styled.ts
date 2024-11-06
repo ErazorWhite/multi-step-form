@@ -4,9 +4,9 @@ import { DESKTOP_BP } from '../../global/breakpoints.ts';
 
 export const PageBoxHeading = styled.h1`
   ${typography.heading};
+  color: var(--color-denim);
   margin: 0 0 9px 0;
   overflow-x: auto;
-  overflow-y: hidden;
 
   @media screen and ${DESKTOP_BP} {
     margin: 0 0 11px 0;

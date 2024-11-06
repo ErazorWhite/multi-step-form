@@ -10,11 +10,13 @@ interface StyledButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 export const StyledButton = styled.button.withConfig({
   shouldForwardProp: (prop) => prop !== 'variant',
 })<StyledButtonProps>`
-  min-width: 124px;
+  min-width: 97px;
+  min-height: 40px;
   padding: 12px 16px;
   font-size: 14px;
   font-weight: 500;
   overflow: hidden;
+  border-radius: 4px;
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
   color: ${({ variant }) => {
     switch (variant) {
@@ -59,5 +61,8 @@ export const StyledButton = styled.button.withConfig({
   @media screen and ${DESKTOP_BP} {
     font-size: 16px;
     padding: 14px 25px;
+    border-radius: 8px;
+    min-width: 123px;
+    min-height: 48px;
   }
 `;
