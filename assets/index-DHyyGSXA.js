@@ -298,7 +298,7 @@ Error generating stack: `+o.message+`
   }
 `,Y0=I.li.withConfig({shouldForwardProp:e=>e!=="lastMargin"})`
   margin: 0 0 12px 0;
-  width: 100%;
+  flex-basis: calc((100% - 32px) / 3);
 
   &:last-of-type {
     margin: 0 0 ${({lastMargin:e=0})=>e} 0;
@@ -418,8 +418,10 @@ Error generating stack: `+o.message+`
   transition: left 0.3s;
   z-index: 0;
 `,r3=({isChecked:e,onToggle:t})=>E.jsxs(e3,{onClick:t,type:"button","aria-pressed":e,children:[E.jsx(Ed,{active:!e,children:"Monthly"}),E.jsx(t3,{children:E.jsx(n3,{isChecked:e})}),E.jsx(Ed,{active:e,children:"Yearly"})]}),i3=I.ul`
+  overflow: scroll;
   @media screen and ${Y} {
     display: flex;
+    flex-wrap: wrap;
     gap: 13px;
     margin: 0 0 32px 0;
   }
