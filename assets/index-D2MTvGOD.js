@@ -541,6 +541,7 @@ Error generating stack: `+o.message+`
   font-size: 14px;
   font-weight: 500;
   overflow: hidden;
+  border-radius: 4px;
   cursor: ${({disabled:e})=>e?"not-allowed":"pointer"};
   color: ${({variant:e})=>{switch(e){case"back":return"var(--color-grey)";case"next":case"submit":default:return"var(--color-white)"}}};
   background-color: ${({variant:e})=>{switch(e){case"back":return"transparent";case"submit":return"var(--color-purple)";case"next":default:return"var(--color-denim)"}}};
@@ -554,6 +555,7 @@ Error generating stack: `+o.message+`
   @media screen and ${Y} {
     font-size: 16px;
     padding: 14px 25px;
+    border-radius: 8px;
   }
 `,Lu=({type:e,onClick:t,children:n,variant:r="back",disabled:i=!1})=>E.jsx($3,{type:e,onClick:t,variant:r,disabled:i,children:n}),P3=I.div.withConfig({shouldForwardProp:e=>e!=="justify"})`
   display: flex;
