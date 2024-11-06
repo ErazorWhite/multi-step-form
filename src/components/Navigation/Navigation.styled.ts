@@ -2,7 +2,7 @@ import styled, {css} from "styled-components";
 import {DESKTOP_BP} from "../../global/breakpoints.ts";
 
 export const Nav = styled.nav`
-    background-image: url('/src/assets/backgrounds/background_mobile.svg');
+    background-image: url(./backgrounds/background_mobile.svg);
     background-size: cover;
     min-height: 172px;
     padding-top: 32px;
@@ -10,7 +10,7 @@ export const Nav = styled.nav`
     @media screen and ${DESKTOP_BP} {
         min-width: 274px;
         padding: 40px 32px;
-        background-image: url('/src/assets/backgrounds/background_desktop.svg');
+        background-image: url('./backgrounds/background_desktop.svg');
         border-radius: 15px;
     }
 `

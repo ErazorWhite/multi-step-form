@@ -1,4 +1,4 @@
-import {ButtonHTMLAttributes, ReactNode} from "react";
+import {ButtonHTMLAttributes, FC, ReactNode} from "react";
 import {StyledButton} from "./Button.styled.ts";
 
 interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -9,7 +9,7 @@ interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
     disabled?: boolean;
 }
 
-export const Button = ({type, onClick, children, variant = "back", disabled = false}: IButton) => (
+export const Button: FC<IButton> = ({type, onClick, children, variant = "back", disabled = false}) => (
     <StyledButton type={type}
                   onClick={onClick}
                   variant={variant}

@@ -6,14 +6,14 @@ import {
     NavDesktopDetails, NavStepNumber, NavStepLabel, NavButton
 } from "./Navigation.styled.ts";
 
-type navigationProps = {
+interface INavigationProps {
     pageCount: number;
     goTo: (i: number) => void;
     currentStepIndex: number;
     isValid: boolean;
 }
 
-export const Navigation: FC<navigationProps> = ({pageCount, goTo, currentStepIndex, isValid}) => (
+export const Navigation: FC<INavigationProps> = ({pageCount, goTo, currentStepIndex, isValid}) => (
     <Nav>
         <NavUl>
             {Array.from({length: pageCount}, (_, i) => (

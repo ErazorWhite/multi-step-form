@@ -3,6 +3,7 @@ import {FormInput} from "../FormInput/FormInput.tsx";
 import {MAXLENGTH_NAME} from "../../../global/сonstants.ts";
 import {maskPhoneNumber} from "../../../global/utilities/maskPhoneNumber.ts";
 import {PHONE_REGEXP, SPECIAL_CHARS_REGEXP} from "../../../global/regexp.ts";
+
 export const PersonalInfo = () => (
     <PageBox headerText='Personal info'
              descriptionText='Please provide your name, email address, and phone number.'>

@@ -10,13 +10,13 @@ interface IFinishingUpContextValues {
     pickedAddons: string[],
 }
 
-type Props = {
+interface IFinishingUpProps {
     plans: IPlan[],
     addons: IAddon[],
     goTo: (i: number) => void,
 }
 
-export const FinishingUp: FC<Props> = ({plans, addons, goTo}) => {
+export const FinishingUp: FC<IFinishingUpProps> = ({plans, addons, goTo}) => {
     const {values: {isYearly, selectedPlan, pickedAddons}} = useFormikContext<IFinishingUpContextValues>()
     const selectedPlanDetails = useMemo(() => plans.find(plan => plan.value === selectedPlan), [plans, selectedPlan]);
     const pickedAddonsDetails = useMemo(() => addons.filter(addon => pickedAddons.includes(addon.value)), [addons, pickedAddons]);

@@ -1,6 +1,6 @@
 import {useField, useFormikContext} from "formik";
 import {RadioInput} from "../../RadioInput/RadioInput.tsx";
-import {useCallback} from "react";
+import {FC, useCallback} from "react";
 import {ToggleSwitch} from "../../ToggleSwitch/ToggleSwitch.tsx";
 import {Li} from "../../../global/global.styled.ts";
 import {FORM_FIELD_NAMES} from "../../../global/сonstants.ts";
@@ -18,7 +18,7 @@ interface IFormRadioContextValues {
 }
 
 
-export const FormRadioGroup = ({name, plans, hasYearlyTrigger = false}: IFormRadioGroupProps) => {
+export const FormRadioGroup: FC<IFormRadioGroupProps> = ({name, plans, hasYearlyTrigger = false}) => {
     const [field, meta] = useField(name);
     const {values: {isYearly}, setFieldValue} = useFormikContext<IFormRadioContextValues>();
 

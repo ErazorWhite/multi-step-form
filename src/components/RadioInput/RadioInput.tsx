@@ -1,5 +1,5 @@
 import {ExtraDetails, Label, Price, RadioIconBox} from "./RadioInput.styled.ts";
-import {ChangeEventHandler, FocusEventHandler, ReactNode} from "react";
+import {ChangeEventHandler, FC, FocusEventHandler, ReactNode} from "react";
 import {LabelBox, StyledInput} from "../LabelInputBox/LabelInputBox.styled.ts";
 
 export interface IRadioInput {
@@ -16,7 +16,7 @@ export interface IRadioInput {
     icon?: ReactNode;
 }
 
-export const RadioInput = ({
+export const RadioInput: FC<IRadioInput> = ({
                                label,
                                name,
                                value,
@@ -28,7 +28,7 @@ export const RadioInput = ({
                                checked,
                                onChange,
                                onBlur
-                           }: IRadioInput) => {
+                           }) => {
     return (
         <>
             <StyledInput className="visually-hidden"

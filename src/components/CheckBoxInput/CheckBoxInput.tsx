@@ -6,7 +6,7 @@ import {
     CheckmarkBoxLabel,
     CheckmarkBoxPrice
 } from "./CheckBoxInput.styled.ts";
-import {ChangeEventHandler, FocusEventHandler} from "react";
+import {ChangeEventHandler, FC, FocusEventHandler} from "react";
 
 interface ICheckboxInput {
     value: string;
@@ -21,7 +21,7 @@ interface ICheckboxInput {
     onBlur?: FocusEventHandler<HTMLInputElement>;
 }
 
-export const CheckBoxInput = ({
+export const CheckBoxInput: FC<ICheckboxInput> = ({
                                   value,
                                   name,
                                   label,
@@ -32,7 +32,7 @@ export const CheckBoxInput = ({
                                   checked,
                                   onBlur,
                                   onChange
-                              }: ICheckboxInput) => {
+                              }) => {
     return (
         <>
             <StyledInput className="visually-hidden" type="checkbox" id={value} name={name} value={value}

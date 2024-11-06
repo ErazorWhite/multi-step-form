@@ -1,6 +1,6 @@
 import {useField} from "formik";
 import {FormInputLabel, FormInputField, FormInputHeadingContainer} from "./FormInput.styled.ts";
-import {ChangeEvent, useRef} from "react";
+import {ChangeEvent, FC, useRef} from "react";
 import {Error} from "../../../global/global.styled.ts";
 
 interface IFormInput {
@@ -14,7 +14,7 @@ interface IFormInput {
     required?: boolean,
 }
 
-export const FormInput = ({label, placeholder, maskFunction, ...props}: IFormInput) => {
+export const FormInput: FC<IFormInput> = ({label, placeholder, maskFunction, ...props}) => {
     const [field, meta, helpers] = useField(props.name)
     const inputRef = useRef<HTMLInputElement>(null);
 

@@ -3,9 +3,12 @@ import {FormRadioGroup} from "../FormRadioGroup/FormRadioGroup.tsx";
 import {IPlan} from "../../../global/types.ts";
 import {FC} from "react";
 
-type Props = { name: string, plans: IPlan[] };
+interface ISelectPlanProps {
+    name: string,
+    plans: IPlan[]
+}
 
-export const SelectPlan: FC<Props> = ({name, plans}) => (
+export const SelectPlan: FC<ISelectPlanProps> = ({name, plans}) => (
 
     <PageBox headerText='Select your plan'
              descriptionText='You have the option of monthly or yearly billing.'>

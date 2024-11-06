@@ -5,12 +5,11 @@ export const StyledContainer = styled.div`
     max-width: 415px;
     height: 100%;
     margin: 0 auto;
-    padding: 0 20px;
     justify-content: center;
     align-items: center;
 
     @media screen and ${DESKTOP_BP} {
+        padding: 100px 20px 0 20px;
         max-width: 980px;
-        padding-top: 100px;
     }
 `

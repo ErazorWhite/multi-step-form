@@ -3,9 +3,12 @@ import {FormCheckboxGroup} from "../FormCheckboxGroup/FormCheckboxGroup.tsx";
 import {IAddon} from "../../../global/types.ts";
 import {FC} from "react";
 
-type Props = { name: string, addons: IAddon[] }
+interface IPickAddonsProps {
+    name: string,
+    addons: IAddon[]
+}
 
-export const PickAddons: FC<Props> = ({name, addons}) => (
+export const PickAddons: FC<IPickAddonsProps> = ({name, addons}) => (
     <PageBox headerText='Pick add-ons'
              descriptionText='Add-ons help enhance your gaming experience.'>
 

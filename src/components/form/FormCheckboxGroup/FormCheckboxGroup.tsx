@@ -3,6 +3,7 @@ import {useField, useFormikContext} from "formik";
 import {IAddon} from "../../../global/types.ts";
 import {Li} from "../../../global/global.styled.ts";
 import {Ul} from "./FormCheckboxGroup.styled.ts";
+import {FC} from "react";
 
 interface IFormCheckBoxGroupProps {
     name: string;
@@ -13,7 +14,7 @@ interface IFormCheckBoxContextValues {
     isYearly: boolean;
 }
 
-export const FormCheckboxGroup = ({name, options}: IFormCheckBoxGroupProps) => {
+export const FormCheckboxGroup: FC<IFormCheckBoxGroupProps> = ({name, options}) => {
     const [field] = useField(name);
     const {values: {isYearly}} = useFormikContext<IFormCheckBoxContextValues>();
 
