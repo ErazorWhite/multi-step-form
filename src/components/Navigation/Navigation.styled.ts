@@ -90,9 +90,19 @@ export const NavButton = styled.button`
     text-align: start;
   }
 
-  &:hover ${NavNumberItemCircle}, &:focus ${NavNumberItemCircle} {
-    color: var(--color-denim);
-    background-color: var(--color-sky-blue);
-    transition: var(--animation);
+  @media (hover: hover) {
+    &:hover ${NavNumberItemCircle}, &:focus ${NavNumberItemCircle} {
+      color: var(--color-denim);
+      background-color: var(--color-sky-blue);
+      transition: var(--animation);
+    }
+  }
+
+  @media (hover: none) {
+    &:active ${NavNumberItemCircle}, &:focus ${NavNumberItemCircle} {
+      color: var(--color-denim);
+      background-color: var(--color-sky-blue);
+      transition: var(--animation);
+    }
   }
 `;
