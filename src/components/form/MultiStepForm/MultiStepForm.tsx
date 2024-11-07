@@ -1,5 +1,5 @@
 import { Formik, FormikValues } from 'formik';
-import { FC } from 'react';
+import { FC, useCallback } from 'react';
 import { MultiStepFormFields } from '../MultiStepFormFields/MultiStepFormFields.tsx';
 import { useMultiStepForm } from '../../../hooks/useMultiStepForm.ts';
 import { multiStepFormValidationSchemas } from '../../../global/utilities/validationSchemas.ts';
@@ -19,9 +19,9 @@ const pagesCount = 4;
 export const MultiStepForm: FC = () => {
   const { currentStepIndex, goTo, next, back } = useMultiStepForm(pagesCount);
 
-  const handleSubmit = (values: FormikValues) => {
+  const handleSubmit = useCallback((values: FormikValues) => {
     console.log(values);
-  };
+  }, []);
 
   return (
     <Formik<IFormValues>

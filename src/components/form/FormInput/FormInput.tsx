@@ -1,6 +1,6 @@
 import { useField } from 'formik';
 import { FormInputLabel, FormInputField, FormInputHeadingContainer } from './FormInput.styled.ts';
-import { ChangeEvent, FC, useRef } from 'react';
+import { ChangeEvent, FC, useCallback, useRef } from 'react';
 import { Error } from '../../../global/global.styled.ts';
 
 interface IFormInput {
@@ -21,22 +21,25 @@ export const FormInput: FC<IFormInput> = ({ label, placeholder, maskFunction, ..
   const [field, meta, helpers] = useField(props.name);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    let { value } = e.target;
+  const handleChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      let { value } = e.target;
 
-    if (maskFunction) {
-      const cursorPosition = e.target.selectionStart || 0;
-      const { formattedValue, newCursorPosition } = maskFunction(value, cursorPosition);
-      setTimeout(() => {
-        if (inputRef.current && newCursorPosition) {
-          inputRef.current.setSelectionRange(newCursorPosition, newCursorPosition);
-        }
-      }, 0);
-      value = formattedValue;
-    }
+      if (maskFunction) {
+        const cursorPosition = e.target.selectionStart || 0;
+        const { formattedValue, newCursorPosition } = maskFunction(value, cursorPosition);
+        setTimeout(() => {
+          if (inputRef.current && newCursorPosition) {
+            inputRef.current.setSelectionRange(newCursorPosition, newCursorPosition);
+          }
+        }, 0);
+        value = formattedValue;
+      }
 
-    void helpers.setValue(value);
-  };
+      void helpers.setValue(value);
+    },
+    [maskFunction, helpers, inputRef]
+  );
 
   return (
     <>
