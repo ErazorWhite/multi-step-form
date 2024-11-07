@@ -2,7 +2,7 @@ import { FC, useCallback } from 'react';
 import { IAddon, IPlan } from '../../global/types.ts';
 import {
   SummaryAddonDetails,
-  SummaryAddonLabel,
+  SummaryAddonName,
   SummaryChangeButton,
   SummaryContainer,
   SummarySelectedPlanDetails,
@@ -56,14 +56,18 @@ export const Summary: FC<ISummaryProps> = ({ plan, addons, isYearly, goTo }) => 
           </SummaryPlanPrice>
         </SummarySelectedPlanDetails>
         <ul>
-          {addons.map((addon) => (
-            <SummaryAddonDetails key={addon.value}>
-              <SummaryAddonLabel>{addon.label}</SummaryAddonLabel>
-              <span>
-                +{formatPrice(isYearly ? addon.yearlyPrice : addon.monthlyPrice, addon.currency)}
-              </span>
-            </SummaryAddonDetails>
-          ))}
+          {addons.length ? (
+            addons.map((addon) => (
+              <SummaryAddonDetails key={addon.value}>
+                <SummaryAddonName>{addon.label}</SummaryAddonName>
+                <span>
+                  +{formatPrice(isYearly ? addon.yearlyPrice : addon.monthlyPrice, addon.currency)}
+                </span>
+              </SummaryAddonDetails>
+            ))
+          ) : (
+            <SummaryAddonName>No addons selected</SummaryAddonName>
+          )}
         </ul>
       </SummaryContainer>
 

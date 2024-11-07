@@ -50,7 +50,7 @@ export const SummaryPlanPrice = styled.span`
   font-weight: 700;
 `;
 
-export const SummaryAddonDetails = styled.div`
+export const SummaryAddonDetails = styled.li`
   display: flex;
   justify-content: space-between;
   margin: 0 0 12px 0;
@@ -64,7 +64,7 @@ export const SummaryAddonDetails = styled.div`
   }
 `;
 
-export const SummaryAddonLabel = styled.span`
+export const SummaryAddonName = styled.span`
   color: var(--color-grey);
 `;
 

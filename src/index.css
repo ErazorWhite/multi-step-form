@@ -76,7 +76,7 @@ html, body, #root {
 }
 
 @font-face {
-    font-family: 'Ubuntu';
+    font-family: Ubuntu;
     src: url('./assets/fonts/Ubuntu-Regular.woff2') format('woff2'),
     url('./assets/fonts/Ubuntu-Regular.woff') format('woff'),
     url('./assets/fonts/Ubuntu-Regular.ttf') format('truetype');

@@ -3,9 +3,7 @@
 import styled from 'styled-components';
 import { DESKTOP_BP, MOBILE_BP } from '../../global/breakpoints.ts';
 
-export const ButtonsBlock = styled.div.withConfig({
-  shouldForwardProp: (prop) => prop !== 'justify',
-})`
+export const ButtonsBlock = styled.div`
   display: flex;
   justify-content: center;
   padding: 16px;
@@ -24,7 +22,9 @@ interface IButtonWidthLimiter {
   justify: string;
 }
 
-export const ButtonWidthLimiter = styled.div<IButtonWidthLimiter>`
+export const ButtonWidthLimiter = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== 'justify',
+})<IButtonWidthLimiter>`
   display: flex;
   width: 100%;
   max-width: 343px;
